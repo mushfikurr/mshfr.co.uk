@@ -1,8 +1,15 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { NowPlaying } from "./components/NowPlaying";
+
+const queryClient = new QueryClient();
+
 function App() {
   return (
-    <div className="min-h-screen">
-      <h1 className="text-text-100">Hello</h1>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="min-h-screen">
+        <NowPlaying />
+      </div>
+    </QueryClientProvider>
   );
 }
 
