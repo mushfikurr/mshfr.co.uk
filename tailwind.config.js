@@ -8,6 +8,15 @@ export default {
       fontFamily: {
         inter: ["Inter", ...defaultTheme.fontFamily.sans],
       },
+      backgroundImage: {
+        "background-img": "url('/img/background.png')",
+      },
+      dropShadow: {
+        glow: [
+          "0 0px 20px rgba(255, 255, 255, 0.35)",
+          "0 0px 65px rgba(255, 255, 255, 0.2)",
+        ],
+      },
       colors: {
         background: {
           50: "#f2f4fd",
@@ -21,6 +30,19 @@ export default {
           800: "#1c2d70",
           900: "#1c285e",
           950: "#03040a",
+        },
+        card: {
+          50: "#f6f6f9",
+          100: "#ededf1",
+          200: "#d7d8e0",
+          300: "#b3b5c6",
+          400: "#8a8ca6",
+          500: "#6b6e8c",
+          600: "#565873",
+          700: "#46475e",
+          800: "#3d3e4f",
+          900: "#363744",
+          950: "#0f0f13",
         },
         text: {
           50: "#f2f4fb",
@@ -77,5 +99,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@shrutibalasa/tailwind-grid-auto-fit")],
 };

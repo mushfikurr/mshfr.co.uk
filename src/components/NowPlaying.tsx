@@ -34,14 +34,18 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({
   };
 
   return (
-    <div className="flex items-center gap-3">
+    <div
+      className={cn(
+        "absolute flex items-center gap-3 z-50 top-6 left-8 max-sm:hidden",
+        className
+      )}
+    >
       <div
         className={cn(
-          "relative rounded-full border-2 border-background-100/10 h-12 w-12 overflow-clip",
+          "relative rounded-full border-2 border-background-100/10 h-14 w-14 overflow-clip",
           trackQuery.data?.active && "border-primary-400",
           trackQuery.isFetching && "animate-pulse",
-          trackQuery.isError && "border-0",
-          className
+          trackQuery.isError && "border-0"
         )}
       >
         {renderImage()}
@@ -75,7 +79,7 @@ export const TrackDetails: React.FC<TrackDetailsProps> = ({
     <div>
       <button
         className={cn(
-          "group inline-flex items-center gap-1 text-text-100 h-full pb-0.5",
+          "group flex items-center gap-1 text-text-100 h-full pb-0.5",
           "transition-all duration-300 ease-in-out",
           expanded && "gap-3",
           className
