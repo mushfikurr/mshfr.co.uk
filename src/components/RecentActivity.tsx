@@ -1,23 +1,88 @@
 import humanizeDuration from "humanize-duration";
-import { GitBranch, GitBranchPlus } from "lucide-react";
 import {
-    useGitHubActivity
+  ExternalLink,
+  GitBranch,
+  GitBranchPlus,
+  Loader2,
+  Star,
+} from "lucide-react";
+import React from "react";
+import {
+  GitHubActivity,
+  useGitHubActivity,
 } from "../utils/hooks/useGithubActivity";
-import Card from "./Card";
-import { PrimaryButton } from "./PrimaryButton";
+import Card from "./ui/Card";
+import { SecondaryButton } from "./ui/SecondaryButton";
 
+interface IconObject {
+  title: string;
+  icon: () => JSX.Element | null;
+}
 interface IconMap {
-  [key: string]: () => JSX.Element | null;
+  [key: string]: IconObject;
 }
 
 export const RecentActivity: React.FC = () => {
-  const { data } = useGitHubActivity();
-  const EVENT_TO_ICON: IconMap = {
-    PushEvent: () => <GitBranchPlus className={iconClassnames} />,
+  const { data, isLoading, isFetching } = useGitHubActivity();
+
+  const renderActivityCardList = () => {
+    if (isLoading) {
+      return <Loading />;
+    } else {
+      return data
+        ?.slice(0, 3)
+        .map((a) => <ActivityCard key={a.id} activity={a} />);
+    }
   };
 
+  return (
+    <>
+      <h2 className="font-medium text-text-100 text-lg inline-flex items-center gap-3">
+        Recent Activity
+        {isFetching && (
+          <span>
+            <Loader2 className="text-text-400 h-4 w-4" />
+          </span>
+        )}
+      </h2>
+      <div className="grid grid-auto-fit-lg w-full gap-6 h-full grow pb-16">
+        {renderActivityCardList()}
+      </div>
+    </>
+  );
+};
+
+function Loading() {
+  return (
+    <div className="h-full w-full flex items-center justify-center">
+      <Loader2 className="h-5 animate-pulse ease-in-out" />
+    </div>
+  );
+}
+
+function ActivityCard({ activity }: { activity: GitHubActivity }) {
+  const EVENT_TO_ICON: IconMap = {
+    PushEvent: {
+      title: "Commit to",
+      icon: () => <GitBranchPlus className={iconClassnames} />,
+    },
+    WatchEvent: {
+      title: "Took interest in",
+      icon: () => <Star className={iconClassnames} />,
+    },
+  };
+
+  const today = new Date();
+  const createdAt = new Date(activity.createdAt);
+  const difference = today.getTime() - createdAt.getTime();
+  const eventTitle = EVENT_TO_ICON[activity.type].title ?? "";
+  const formattedCreatedAt = humanizeDuration(difference, {
+    units: ["d", "h", "m"],
+    round: true,
+  });
+
   const iconToRender = (type: string) => {
-    const IconComponent = EVENT_TO_ICON[type];
+    const IconComponent = EVENT_TO_ICON[type].icon;
     return IconComponent ? (
       IconComponent()
     ) : (
@@ -25,38 +90,34 @@ export const RecentActivity: React.FC = () => {
     );
   };
 
-  const iconClassnames = "h-5 w-5";
+  const githubUrl = `https://github.com/${activity.repoName}`;
 
+  const handleOpen = () => {
+    window.open(githubUrl, "_blank");
+  };
+
+  const iconClassnames = "h-5 w-5";
   return (
-    <div className="h-full flex flex-col gap-4 grow">
-      <h2 className="font-medium text-text-100 text-lg">Recent Activity</h2>
-      <div className="grid grid-auto-fit-lg w-full gap-6 h-full grow pb-12">
-        {data?.slice(0, 3).map((a) => {
-          const today = new Date();
-          const createdAt = new Date(a.createdAt);
-          const difference = today.getTime() - createdAt.getTime(); 
-          const formattedCreatedAt = humanizeDuration(difference, {
-            units: ["d", "h", "m"],
-            round: true,
-          });
-          return (
-            <Card key={a.id} className="flex flex-col justify-between">
-              <div>
-                <div className="flex gap-3 w-full items-center">
-                  {iconToRender(a.type)}
-                  <p className="leading-none">{a.repoName}</p>
-                </div>
-                <div className="pl-8 text-text-100/60 text-sm">
-                  <p>{formattedCreatedAt}</p>
-                </div>
-              </div>
-              <div className="flex w-full justify-end">
-                <PrimaryButton>Open</PrimaryButton>
-              </div>
-            </Card>
-          );
-        })}
+    <Card key={activity.id} className="flex flex-col justify-between gap-6">
+      <div className="space-y-1">
+        <div className="flex gap-3 w-full items-center">
+          {iconToRender(activity.type)}
+          <div className="space-y-1">
+            <p className="leading-tight -mt-0.5 line-clamp-3 text-ellipsis text-text-100">
+              {eventTitle} {activity.repoName}
+            </p>
+          </div>
+        </div>
+        <p className="text-text-400 text-sm">{formattedCreatedAt}</p>
       </div>
-    </div>
+      <div className="flex w-full justify-end">
+        <SecondaryButton onClick={handleOpen}>
+          <span className="inline-flex items-center gap-2">
+            <p className="h-full leading-none mt-[2.6px]">Visit</p>
+            <ExternalLink className="h-4 w-4" />
+          </span>
+        </SecondaryButton>
+      </div>
+    </Card>
   );
-};
+}

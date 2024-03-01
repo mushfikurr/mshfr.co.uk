@@ -5,10 +5,7 @@ import { cn } from "../utils/utils";
 
 interface NowPlayingProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export const NowPlaying: React.FC<NowPlayingProps> = ({
-  className,
-  ...props
-}) => {
+export const NowPlaying: React.FC<NowPlayingProps> = ({ className }) => {
   const [expanded, setExpanded] = useState(false);
   const trackQuery = useTrack();
 
@@ -36,14 +33,14 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({
   return (
     <div
       className={cn(
-        "absolute flex items-center gap-3 z-50 top-6 left-8 max-sm:hidden",
+        "fixed flex items-center gap-3 z-50 top-6 left-4 max-sm:hidden",
         className
       )}
     >
       <div
         className={cn(
-          "relative rounded-full border-2 border-background-100/10 h-14 w-14 overflow-clip",
-          trackQuery.data?.active && "border-primary-400",
+          "relative rounded-full border-2 border-text-100/10 h-14 w-14 overflow-clip",
+          trackQuery.data?.active && "border-primary",
           trackQuery.isFetching && "animate-pulse",
           trackQuery.isError && "border-0"
         )}
@@ -79,15 +76,20 @@ export const TrackDetails: React.FC<TrackDetailsProps> = ({
     <div>
       <button
         className={cn(
-          "group flex items-center gap-1 text-text-100 h-full pb-0.5",
+          "group flex items-center gap-1 text-text-100 h-full pb-0.5 bg-transparent",
           "transition-all duration-300 ease-in-out",
-          expanded && "gap-3",
+          expanded && "gap-3 bg-background-950/60 backdrop-blur-sm",
           className
         )}
         {...props}
         onClick={() => setExpanded(!expanded)}
       >
-        <Headphones className="h-4 w-4" />
+        <Headphones
+          className={cn(
+            "h-4 w-4 text-text-400 group-hover:text-text-100",
+            "transition-all duration-500 ease-in-out"
+          )}
+        />
 
         <div
           className={cn(
@@ -96,7 +98,7 @@ export const TrackDetails: React.FC<TrackDetailsProps> = ({
             expanded && "max-w-xs opacity-100"
           )}
         >
-          <h1 className="text-xs tracking-wider text-text-100/70 ">
+          <h1 className="text-xs tracking-wider text-text-400 ">
             {track.artist}
           </h1>
           <p className="leading-none pb-0.5">{track.title}</p>
@@ -104,7 +106,7 @@ export const TrackDetails: React.FC<TrackDetailsProps> = ({
 
         <ChevronRight
           className={cn(
-            "h-4 w-4 text-text-100/70 group-hover:text-text-100 group-hover:translate-x-1",
+            "h-4 w-4 text-text-400 group-hover:text-text-100 group-hover:translate-x-1",
             expanded && "group-hover:-translate-x-1",
             expanded && "rotate-180",
             "transition-translate duration-300 ease-in-out"
@@ -125,12 +127,10 @@ export const Empty: React.FC<EmptyProps> = ({
 }: EmptyProps) => {
   return (
     <div
-      className="object-cover bg-background-100/5 inline-flex items-center justify-center w-full h-full"
+      className="object-cover bg-secondary inline-flex items-center justify-center w-full h-full"
       {...props}
     >
-      {showFileIcon && (
-        <FileWarning className="text-background-100/30 h-4 w-4" />
-      )}
+      {showFileIcon && <FileWarning className="text-text-400 h-4 w-4" />}
     </div>
   );
 };
@@ -140,11 +140,11 @@ interface LoadingProps extends React.HTMLAttributes<HTMLDivElement> {}
 export const Loading: React.FC<LoadingProps> = (props: LoadingProps) => {
   return (
     <div
-      className="object-cover bg-background-100/5 inline-flex items-center justify-center w-full h-full"
+      className="object-cover bg-secondary inline-flex items-center justify-center w-full h-full"
       {...props}
     >
       <Loader2
-        className="animate-spin text-background-100/30 h-5 w-5"
+        className="animate-spin text-text-400 h-5 w-5"
         strokeWidth={0.9}
       />
     </div>

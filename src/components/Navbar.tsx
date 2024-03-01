@@ -1,46 +1,61 @@
-import { useState } from "react";
+import { Cog } from "lucide-react";
 import { cn } from "../utils/utils";
+import { Page, Pages } from "./RootLayout";
 
-interface Link {
-  href?: string;
-  text?: React.ReactNode;
+interface NavbarProps {
+  active: Page;
+  setActive: React.Dispatch<React.SetStateAction<Page>>;
+  pages: Pages;
 }
 
-const links: Link[] = [
-  { href: "#home", text: "Home" },
-  { href: "#projects", text: "Projects" },
-  { href: "#contact", text: "Contact" },
-];
+export function Navbar({ ...props }: NavbarProps) {
+  const isItemActive = (page: Page) => props.active === page;
 
-export function Navbar() {
-  const [active, setActive] = useState<Link>(links[0]);
-
-  const handleNavbarItemClick = (currentLink: Link) => {
-    setActive(currentLink);
+  const renderNavbarItems = () => {
+    const renderedItems = [];
+    for (const key in props.pages) {
+      renderedItems.push(
+        <NavbarItem
+          active={isItemActive(Page[key as keyof typeof Page])}
+          key={key}
+          href={`#${Page[key as keyof typeof Page]}`}
+        >
+          {key}
+        </NavbarItem>
+      );
+    }
+    return renderedItems;
   };
 
-  const isItemActive = (currentLink: Link) => currentLink.href === active.href;
-
   return (
-    <ul className="top-3 fixed flex gap-6 justify-center w-full z-50 text-text-100/40 font-medium bg-background-950/80 backdrop-blur-md py-6">
-      {links.map((link: Link) => (
-        <NavbarItem
-          link={link}
-          active={isItemActive(link)}
-          key={link.href}
-          onClick={() => handleNavbarItemClick(link)}
-        />
-      ))}
+    <ul className="top-3 fixed flex gap-6 justify-center items-center w-full z-50 text-text-400 font-medium bg-background/90 backdrop-blur-sm py-6">
+      {renderNavbarItems()}
+      <li
+        className={cn(
+          "hover:text-text-100 inline-flex items-center",
+          "transition-colors duration-300 ease-in-out"
+        )}
+      >
+        <button>
+          <Cog className="h-6 hover:rotate-90 transition-transform ease-in-out duration-500" />
+        </button>
+      </li>
     </ul>
   );
 }
 
-interface NavbarItemProps extends React.HTMLAttributes<HTMLLIElement> {
+interface NavbarItemProps extends React.ComponentPropsWithoutRef<"li"> {
   active?: boolean;
-  link: Link;
+  href: string;
 }
 
-function NavbarItem({ active, link, className, ...props }: NavbarItemProps) {
+function NavbarItem({
+  active,
+  href,
+  className,
+  children,
+  ...props
+}: NavbarItemProps) {
   return (
     <li
       className={cn(
@@ -51,7 +66,7 @@ function NavbarItem({ active, link, className, ...props }: NavbarItemProps) {
       )}
       {...props}
     >
-      <a href={link.href}>{link.text}</a>
+      <a href={href}>{children}</a>
     </li>
   );
 }
