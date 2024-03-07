@@ -5,7 +5,7 @@ import { PrimaryButton } from "./ui/PrimaryButton";
 export const ContactForm: React.FC = () => (
   <form
     className="w-full space-y-6"
-    action="ttps://api.web3forms.com/submit"
+    action="https://api.web3forms.com/submit"
     method="POST"
   >
     <input
