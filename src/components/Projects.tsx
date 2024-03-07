@@ -110,7 +110,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </button>
         <p
           className={cn(
-            "text-text-300 line-clamp-2 text-sm",
+            "text-text-300 line-clamp-2 text-sm max-sm:line-clamp-none",
             expanded && "hidden"
           )}
         >
