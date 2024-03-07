@@ -1,21 +1,16 @@
-import {
-  ArrowDownFromLine,
-  ArrowUpFromLine,
-  ChevronDown,
-  Github,
-} from "lucide-react";
+import { ArrowDownFromLine, ArrowUpFromLine, ChevronDown } from "lucide-react";
 import { useRef, useState } from "react";
 import { bookalProps } from "../content/Bookal";
+import { collaborativeVideoEditingProps } from "../content/CollaborativeVideoEditing";
+import { ytSampleGenProps } from "../content/YtSampleGen";
 import { cn } from "../utils/utils";
 import Card from "./ui/Card";
 import { ProjectDialog, ProjectDialogProps } from "./ui/Dialog";
 import { EmojiCallout } from "./ui/EmojiCallout";
 import { IconLinkProps } from "./ui/IconLink";
+import { Link } from "./ui/Link";
 import { PrimaryButton } from "./ui/PrimaryButton";
 import { Revealable } from "./ui/Revealable";
-import { Link } from "./ui/Link";
-import { collaborativeVideoEditingProps } from "../content/CollaborativeVideoEditing";
-import { ytSampleGenProps } from "../content/YtSampleGen";
 
 export const Projects: React.FC = () => {
   const [expanded, setExpanded] = useState(false);

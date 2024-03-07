@@ -1,4 +1,3 @@
-import { LucideIcon } from "lucide-react";
 import { cn } from "../../utils/utils";
 
 export interface LinkProps extends React.ComponentPropsWithoutRef<"a"> {}

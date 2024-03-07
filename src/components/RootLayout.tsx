@@ -5,7 +5,6 @@ import { cn } from "../utils/utils";
 import { ContactForm } from "./ContactForm";
 import { ContactLinks, LandingSection } from "./LandingSection";
 import { Navbar } from "./Navbar";
-import { NowPlaying } from "./NowPlaying";
 import { Projects } from "./Projects";
 import { RecentActivity } from "./RecentActivity";
 import { EmojiCallout } from "./ui/EmojiCallout";
