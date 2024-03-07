@@ -13,6 +13,7 @@ import {
 } from "../utils/hooks/useGithubActivity";
 import Card from "./ui/Card";
 import { SecondaryButton } from "./ui/SecondaryButton";
+import { cn } from "../utils/utils";
 
 interface IconObject {
   title: string;
@@ -31,7 +32,7 @@ export const RecentActivity: React.FC = () => {
     } else {
       return data
         ?.slice(0, 3)
-        .map((a) => <ActivityCard key={a.id} activity={a} />);
+        .map((a, idx) => <ActivityCard key={a.id} activity={a} idx={idx} />);
     }
   };
 
@@ -45,7 +46,7 @@ export const RecentActivity: React.FC = () => {
           </span>
         )}
       </h2>
-      <div className="grid grid-auto-fit-lg w-full gap-6 h-full grow pb-16">
+      <div className="grid grid-auto-fit-lg w-full gap-6 grow pb-16">
         {renderActivityCardList()}
       </div>
     </>
@@ -60,7 +61,13 @@ function Loading() {
   );
 }
 
-function ActivityCard({ activity }: { activity: GitHubActivity }) {
+function ActivityCard({
+  activity,
+  idx,
+}: {
+  activity: GitHubActivity;
+  idx: number;
+}) {
   const EVENT_TO_ICON: IconMap = {
     PushEvent: {
       title: "Commit to",
@@ -97,8 +104,15 @@ function ActivityCard({ activity }: { activity: GitHubActivity }) {
   };
 
   const iconClassnames = "h-5 w-5";
+  const delayTime = idx * 100 + "ms";
   return (
-    <Card key={activity.id} className="flex flex-col justify-between gap-6">
+    <Card
+      key={activity.id}
+      className={cn(
+        "flex flex-col justify-between gap-6 animate-in fade-in slide-in-from-bottom-16 duration-500 ease-in-out shadow-md"
+      )}
+      style={{ animationDelay: delayTime }}
+    >
       <div className="space-y-1">
         <div className="flex gap-3 w-full items-center">
           {iconToRender(activity.type)}

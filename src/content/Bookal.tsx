@@ -9,11 +9,14 @@ export const BookalContent = () => (
       Bookal is a booking platform built with local businesses in mind. It
       started with my realisation that some smaller businesses do not have
       access to more modern infrastructure for online booking, and instead
-      handle this all manually. With the advancement of technology, and the
-      capacity to meet these needs to drive customer interaction and make the
-      process more streamlined, I set out to build Bookal. Bookal features full
-      control for businesses to customise their page and opening hours, and
-      allows users full transparency for booking in convenient slots.
+      handle this all manually.
+    </p>
+    <p>
+      With the advancement of technology, and the capacity to meet these needs
+      to drive customer interaction and make the process more streamlined, I set
+      out to build Bookal. Bookal features full control for businesses to
+      customise their page and opening hours, and allows users full transparency
+      for booking in convenient slots.
     </p>
     <BodySubheading>Implementation details</BodySubheading>
     <p>
@@ -45,27 +48,30 @@ export const BookalContent = () => (
 );
 
 export const bookalProps: ProjectCardProps = {
-  title: "Bookal: A Booking App For Local Businesses",
+  title: "Bookal",
   description: <BookalContent />,
   summary:
     "A fully-featured booking platform that allows local businesses to create, manage, and share their business with customers.",
   imgSrc: "/img/stock-application-image.png",
   links: [
-    { Icon: Github, title: "View GitHub repository" },
-    { Icon: Globe, title: "View live website" },
+    {
+      Icon: Globe,
+      title: "View live website",
+      href: "https://djmp5s7y24vjt.cloudfront.net/",
+    },
+    {
+      Icon: Github,
+      title: "View GitHub repository",
+      href: "https://github.com/mushfikurr/booking-app",
+    },
   ],
   techStack: [
-    { Icon: Github, title: "GitHub" },
-    { Icon: Github, title: "GitHub" },
-    { Icon: Github, title: "GitHub" },
-    { Icon: Github, title: "GitHub" },
-    { Icon: Github, title: "GitHub" },
-    { Icon: Github, title: "GitHub" },
-    { Icon: Github, title: "GitHub" },
-    { Icon: Github, title: "GitHub" },
-    { Icon: Github, title: "GitHub" },
-    { Icon: Github, title: "GitHub" },
-    { Icon: Github, title: "GitHub" },
-    { Icon: Github, title: "GitHub" },
+    { children: "React", href: "https://react.dev/" },
+    { children: "Next.js", href: "https://react.dev/" },
+    { children: "Next-Auth", href: "https://next-auth.js.org/" },
+    { children: "Tailwind", href: "https://tailwindcss.com/" },
+    { children: "MySQL" },
+    { children: "React-Query", href: "https://tanstack.com/query/v3/" },
+    { children: "shadcn/ui", href: "https://ui.shadcn.com/" },
   ],
 };

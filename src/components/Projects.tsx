@@ -5,22 +5,28 @@ import {
   Github,
 } from "lucide-react";
 import { useRef, useState } from "react";
+import { bookalProps } from "../content/Bookal";
 import { cn } from "../utils/utils";
 import Card from "./ui/Card";
-import { Revealable } from "./ui/Revealable";
 import { ProjectDialog, ProjectDialogProps } from "./ui/Dialog";
 import { EmojiCallout } from "./ui/EmojiCallout";
 import { IconLinkProps } from "./ui/IconLink";
 import { PrimaryButton } from "./ui/PrimaryButton";
-import { BookalContent, bookalProps } from "../content/Bookal";
+import { Revealable } from "./ui/Revealable";
+import { Link } from "./ui/Link";
+import { collaborativeVideoEditingProps } from "../content/CollaborativeVideoEditing";
+import { ytSampleGenProps } from "../content/YtSampleGen";
 
 export const Projects: React.FC = () => {
   const [expanded, setExpanded] = useState(false);
   const showMoreBtnRef = useRef<HTMLButtonElement>(null);
+  const HIDE_SHOW_MORE = true; // Flag for hiding the show more button. If there are more than three projects, set this to false.
 
   const initialDisplayedContent = (
     <>
       <ProjectCard {...bookalProps} />
+      <ProjectCard {...collaborativeVideoEditingProps} />
+      <ProjectCard {...ytSampleGenProps} />
     </>
   );
 
@@ -31,7 +37,7 @@ export const Projects: React.FC = () => {
   return (
     <div className="flex flex-col h-full gap-8 overflow-y-auto">
       <div className="space-y-2">
-        <h1 className="text-3xl font-semibold pt-8">Projects</h1>
+        <h1 className="text-3xl font-semibold pt-8 tracking-tight">Projects</h1>
         <EmojiCallout emoji={"📌"} heading="I'm a project driven person.">
           Below are products I have worked on meticulously that have allowed me
           to solidify my skills, and each solve a problem that I have
@@ -44,21 +50,15 @@ export const Projects: React.FC = () => {
           expanded={expanded}
           setExpanded={setExpanded}
           className={"flex flex-col gap-6"}
-        >
-          <ProjectCard
-            title="Bookal"
-            description="Hello"
-            summary="Hello"
-            imgSrc="/img/stock-application-image.png"
-            links={[{ Icon: Github, title: "View GitHub repository" }]}
-            techStack={[{ Icon: Github, title: "GitHub" }]}
-          />
-        </Revealable>
+        ></Revealable>
       </div>
       <div className="flex justify-center">
         <PrimaryButton
           ref={showMoreBtnRef}
-          className="inline-flex gap-2 items-center"
+          className={cn(
+            "inline-flex gap-2 items-center",
+            HIDE_SHOW_MORE && "hidden"
+          )}
           onClick={handleExpand}
         >
           Show {expanded ? "less" : "more"}{" "}
@@ -128,10 +128,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             Skills
           </p>
           <div className="flex gap-2 gap-y-0.5 flex-wrap font-medium line-clamp-2">
-            {dialogProps.techStack.map((t) => (
-              <p key={t.title} className="text-text-400">
-                {t.title}
-              </p>
+            {dialogProps.techStack.map(({ className, children, ...t }) => (
+              <Link className="text-text-400" {...t}>
+                {children}
+              </Link>
             ))}
           </div>
         </div>

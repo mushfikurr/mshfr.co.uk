@@ -14,9 +14,24 @@ export default {
       },
       dropShadow: {
         glow: [
-          "0 0px 15px rgba(119, 152, 217, 0.45)",
-          "0 0px 65px rgba(119, 152, 217, 0.3)",
+          "0 0px 10px rgba(119, 152, 217, 0.45)",
+          "0 0px 20px rgba(119, 152, 217, 0.3)",
         ],
+      },
+      animation: {
+        background: "background 100s linear infinite",
+      },
+      keyframes: {
+        background: {
+          "0%": {
+            "background-size": "400% 400%",
+            "background-position": "0% 0%",
+          },
+          "100%": {
+            "background-size": "400% 400%",
+            "background-position": "100% 100%",
+          },
+        },
       },
       colors: {
         primary: "#7798D9",

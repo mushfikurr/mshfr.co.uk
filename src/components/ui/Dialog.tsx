@@ -5,13 +5,16 @@ import { cn } from "../../utils/utils";
 import { Link } from "../Projects";
 import { cardClassnames } from "./Card";
 import { SecondaryButton } from "./SecondaryButton";
+import Chip from "./Chip";
+
+interface Technology extends React.ComponentPropsWithoutRef<"a"> {}
 
 export interface ProjectDialogProps {
   title: string;
   description: React.ReactNode;
   imgSrc: string;
   links: Link[];
-  techStack: Link[];
+  techStack: Technology[];
 }
 
 export function ProjectDialog({ ...props }: ProjectDialogProps) {
@@ -48,7 +51,7 @@ export function ProjectDialog({ ...props }: ProjectDialogProps) {
         >
           <Dialog.Close
             className={cn(
-              "absolute top-3.5 right-3.5 inline-flex items-center justify-center rounded-full p-1",
+              "absolute top-3.5 right-3.5 inline-flex items-center justify-center rounded-full p-1 z-50",
               "focus:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-opacity-75"
             )}
           >
@@ -64,14 +67,20 @@ export function ProjectDialog({ ...props }: ProjectDialogProps) {
             </div>
             <div className="basis-3/5 flex flex-col items-start gap-6 justify-between relative h-full self-stretch overflow-auto">
               <div className="space-y-3 w-full">
-                <div className="space-y-1">
+                <div className="space-y-3">
                   <Dialog.Title className="text-xl font-semibold text-text-100">
                     {props.title}
                   </Dialog.Title>
-                  <Dialog.Description className="font-normal text-text-400 tracking-wide max-w-prose text-sm h-full">
+                  <div className="flex gap-2 gap-y-2 flex-wrap w-full">
+                    {props.techStack.map(({ children, ...t }) => (
+                      <Chip {...t}>{children}</Chip>
+                    ))}
+                  </div>
+                  <Dialog.Description className="font-normal text-text-300 tracking-wide max-w-prose text-sm h-full">
                     {props.description}
                   </Dialog.Description>
                 </div>
+
                 <hr className="opacity-10" />
                 <ul className="text-text-400 flex flex-col items-start h-full">
                   {props.links.map((link: Link) => (
@@ -115,6 +124,7 @@ export function AnchorExternalLink({
         className
       )}
       href={href}
+      target="_blank"
     >
       <span className="w-full flex gap-3 items-center">
         {props.Icon && <props.Icon className="w-4" />}

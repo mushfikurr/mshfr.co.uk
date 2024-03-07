@@ -7,7 +7,7 @@ export const BodySubheading = ({
   className,
   ...props
 }: BodySubheadingProps) => (
-  <h5 className={cn("font-semibold text-text-300", className)} {...props}>
+  <h5 className={cn("font-semibold text-text-200", className)} {...props}>
     {children}
   </h5>
 );

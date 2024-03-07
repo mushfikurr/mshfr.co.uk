@@ -43,16 +43,19 @@ export function RootLayout() {
   });
 
   return (
-    <div>
+    <div className="">
       <Navbar active={active} pages={pages} setActive={setActive} />
-      <NowPlaying className="pl-8" />
 
-      <PageContainer forwardedRef={pages[Page.Home]} id="Home">
+      <PageContainer
+        className="-mt-[5.6rem]"
+        forwardedRef={pages[Page.Home]}
+        id="Home"
+      >
         <div className="max-w-screen-xl py-24">
           <LandingSection />
         </div>
-        <div className="flex flex-col gap-12 w-full h-full max-w-screen-xl grow">
-          <div className="h-full flex flex-col gap-4 grow">
+        <div className="flex flex-col gap-12 w-full h-full max-w-screen-lg grow">
+          <div className="flex flex-col gap-4 grow">
             <RecentActivity />
           </div>
           <div className="flex items-center justify-center w-full">
@@ -70,17 +73,17 @@ export function RootLayout() {
       </PageContainer>
 
       <PageContainer forwardedRef={pages[Page.Projects]} id="Projects">
-        <div className="max-w-screen-md w-full h-full flex flex-col gap-8">
+        <div className="max-w-prose w-full h-full flex flex-col gap-8">
           <Projects />
         </div>
       </PageContainer>
 
       <PageContainer forwardedRef={pages[Page.Contact]} id="Contact">
-        <div className="max-w-screen-md w-full h-full flex flex-col gap-8">
+        <div className="max-w-prose w-full h-full flex flex-col gap-8">
           <div className="flex flex-col gap-8">
             <div className="space-y-6">
               <div className="space-y-2">
-                <h1 className="text-3xl font-semibold pt-8 text-text-100">
+                <h1 className="text-3xl font-semibold pt-8 text-text-100 tracking-tight">
                   Contact
                 </h1>
                 <EmojiCallout

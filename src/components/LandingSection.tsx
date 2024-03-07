@@ -4,17 +4,19 @@ import { IconLink } from "./ui/IconLink";
 
 export const LandingSection: React.FC = () => {
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 relative">
       <div className="text-center space-y-4">
-        <h1 className="text-4xl tracking-tight drop-shadow-glow font-bold inline-block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+        <div className="highlight -z-50"></div>
+
+        <h1 className="text-4xl tracking-tighter font-bold inline-block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
           Hi, I'm Mushfikur.
         </h1>
-
         <h1 className="text-lg max-w-lg text-text-100">
           A full-stack, London based developer passionate about crafting refined
           software <span className="text-text-400">(and music)</span>
         </h1>
       </div>
+
       <ContactLinks />
     </div>
   );

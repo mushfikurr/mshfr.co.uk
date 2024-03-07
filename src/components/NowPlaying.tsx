@@ -33,13 +33,13 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({ className }) => {
   return (
     <div
       className={cn(
-        "fixed flex items-center gap-3 z-50 top-6 left-4 max-sm:hidden",
+        "flex items-center gap-3 z-50 top-4 left-4 max-sm:hidden",
         className
       )}
     >
       <div
         className={cn(
-          "relative rounded-full border-2 border-text-100/10 h-14 w-14 overflow-clip",
+          "relative rounded-full border-2 border-text-100/10 h-12 w-12 overflow-clip",
           trackQuery.data?.active && "border-primary",
           trackQuery.isFetching && "animate-pulse",
           trackQuery.isError && "border-0"

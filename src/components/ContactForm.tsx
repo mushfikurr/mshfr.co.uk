@@ -26,7 +26,7 @@ export const ContactForm: React.FC = () => (
         required
         className={cn(
           cardClassnames,
-          "focus:border-text-100/10 group-hover:bg-card/50 focus-visible:outline-none p-4 transition-colors duration-300 ease-in-out"
+          "focus:border-text-100/10 group-hover:bg-card/50 focus-visible:outline-none p-4 transition-colors duration-300 ease-in-out shadow-md"
         )}
       />
     </fieldset>
@@ -40,10 +40,11 @@ export const ContactForm: React.FC = () => (
       </label>
       <input
         name="email"
+        type="email"
         required
         className={cn(
           cardClassnames,
-          "focus:border-text-100/10 group-hover:bg-card/50 focus-visible:outline-none p-4 transition-colors duration-300 ease-in-out"
+          "focus:border-text-100/10 group-hover:bg-card/50 focus-visible:outline-none p-4 transition-colors duration-300 ease-in-out shadow-md"
         )}
       />
     </fieldset>
@@ -61,7 +62,7 @@ export const ContactForm: React.FC = () => (
         rows={4}
         className={cn(
           cardClassnames,
-          "focus:border-text-100/10 group-hover:bg-card/50 focus-visible:outline-none p-4 transition-colors duration-300 ease-in-out"
+          "focus:border-text-100/10 group-hover:bg-card/50 focus-visible:outline-none p-4 transition-colors duration-300 ease-in-out shadow-md"
         )}
       />
     </fieldset>
