@@ -50,7 +50,7 @@ export function RootLayout() {
         forwardedRef={pages[Page.Home]}
         id="Home"
       >
-        <div className="max-w-screen-xl py-24">
+        <div className="max-w-screen-xl py-24 max-sm:py-18">
           <LandingSection />
         </div>
         <div className="flex flex-col gap-12 w-full h-full max-w-screen-lg grow">
