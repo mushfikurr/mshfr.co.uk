@@ -22,7 +22,9 @@ function parseTrack(currentTrack: any) {
 }
 
 async function fetchCurrentTrack() {
-  const req = await fetch("/api");
+  const prod = import.meta.env.PROD;
+  const endpoint = prod ? import.meta.env.VITE_LAST_FM_API_ROUTE : "/api";
+  const req = await fetch(endpoint);
   if (!req.ok) {
     throw Error(await req.json());
   }
