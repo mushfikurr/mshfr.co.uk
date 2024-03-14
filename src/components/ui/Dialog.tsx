@@ -1,136 +1,60 @@
-import * as Dialog from "@radix-ui/react-dialog";
-import { AppWindow, ExternalLink, LucideIcon, X } from "lucide-react";
-import { useState } from "react";
+import * as React from "react";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { cn } from "../../utils/utils";
-import { Link } from "../Projects";
-import { cardClassnames } from "./Card";
-import { SecondaryButton } from "./SecondaryButton";
-import Chip from "./Chip";
+import { X } from "lucide-react";
 
-interface Technology extends React.ComponentPropsWithoutRef<"a"> {}
+const Dialog = DialogPrimitive.Root;
 
-export interface ProjectDialogProps {
-  title: string;
-  description: React.ReactNode;
-  imgSrc: string;
-  links: Link[];
-  techStack: Technology[];
-}
+const DialogTrigger = DialogPrimitive.Trigger;
 
-export function ProjectDialog({ ...props }: ProjectDialogProps) {
-  const [isOpen, setIsOpen] = useState(false);
+const DialogPortal = DialogPrimitive.Portal;
 
-  const handleModalOpen = () => setIsOpen(true);
+const DialogClose = DialogPrimitive.Close;
 
-  return (
-    <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-      <Dialog.Trigger asChild>
-        <SecondaryButton
-          className="inline-flex gap-2 items-center"
-          onClick={handleModalOpen}
-        >
-          <span className="inline-flex items-center gap-2">
-            <p className="h-full leading-none">Open</p>
-            <AppWindow className="h-4 w-4" />
-          </span>
-        </SecondaryButton>
-      </Dialog.Trigger>
-      <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-background/60 backdrop-blur-sm" />
+const DialogOverlay = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Overlay>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Overlay
+    ref={ref}
+    className={cn(
+      "fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      className
+    )}
+    {...props}
+  />
+));
+DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
-        <Dialog.Content
-          className={cn(
-            "fixed z-50",
-            "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]",
-            "min-w-fit md:max-w-2xl lg:max-w-4xl max-h-screen rounded-lg p-8 md:w-full",
-            "max-sm:w-screen max-sm:overflow-auto",
-            "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-            cardClassnames,
-            "bg-card/70 backdrop-blur-lg shadow-lg"
-          )}
-        >
-          <Dialog.Close
-            className={cn(
-              "absolute top-3.5 right-3.5 inline-flex items-center justify-center rounded-full p-1 z-50",
-              "focus:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-opacity-75"
-            )}
-          >
-            <X className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full text-text-100 hover:text-primary transition-colors duration-200 ease-in-out" />
-          </Dialog.Close>
-          <div className="flex w-full gap-8 max-sm:flex-col">
-            <div className="basis-2/5 max-sm:pt-8">
-              <img
-                className="object-cover rounded-l-md max-sm:rounded-md"
-                src={props.imgSrc}
-                alt={``}
-              />
-            </div>
-            <div className="basis-3/5 flex flex-col items-start gap-6 justify-between relative h-full self-stretch overflow-auto">
-              <div className="space-y-3 w-full">
-                <div className="space-y-3">
-                  <Dialog.Title className="text-xl font-semibold text-text-100">
-                    {props.title}
-                  </Dialog.Title>
-                  <div className="flex gap-2 gap-y-2 flex-wrap w-full">
-                    {props.techStack.map(({ children, ...t }) => (
-                      <Chip {...t}>{children}</Chip>
-                    ))}
-                  </div>
-                  <Dialog.Description className="font-normal text-text-300 tracking-wide max-w-prose text-sm h-full">
-                    {props.description}
-                  </Dialog.Description>
-                </div>
-
-                <hr className="opacity-10" />
-                <ul className="text-text-400 flex flex-col items-start h-full">
-                  {props.links.map((link: Link) => (
-                    <AnchorExternalLink
-                      key={link.title}
-                      Icon={link.Icon}
-                      title={link.title}
-                      href={link.href}
-                    />
-                  ))}
-                </ul>
-              </div>
-
-              <div className="sticky w-full flex justify-end">
-                <Dialog.Close>
-                  <SecondaryButton>Close</SecondaryButton>
-                </Dialog.Close>
-              </div>
-            </div>
-          </div>
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog.Root>
-  );
-}
-
-interface AnchorExternalLinkProps extends React.ComponentPropsWithoutRef<"a"> {
-  Icon?: LucideIcon;
-  title: string;
-}
-export function AnchorExternalLink({
-  className,
-  href,
-  ...props
-}: AnchorExternalLinkProps) {
-  return (
-    <a
+const DialogContent = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
+>(({ className, children, ...props }, ref) => (
+  <DialogPortal>
+    <DialogOverlay />
+    <DialogPrimitive.Content
+      ref={ref}
       className={cn(
-        "text-sm w-full text-start flex items-center cursor-pointer select-none",
-        "hover:text-text-100 transition-colors ease-in-out duration-300",
+        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background/60 p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg",
         className
       )}
-      href={href}
-      target="_blank"
+      {...props}
     >
-      <span className="w-full flex gap-3 items-center">
-        {props.Icon && <props.Icon className="w-4" />}
-        <p className="">{props.title}</p>
-      </span>
-      <ExternalLink className="w-4" />
-    </a>
-  );
-}
+      {children}
+      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-text-400">
+        <X className="h-4 w-4" />
+        <span className="sr-only">Close</span>
+      </DialogPrimitive.Close>
+    </DialogPrimitive.Content>
+  </DialogPortal>
+));
+DialogContent.displayName = DialogPrimitive.Content.displayName;
+
+export {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+  DialogTrigger,
+  DialogClose,
+  DialogContent,
+};

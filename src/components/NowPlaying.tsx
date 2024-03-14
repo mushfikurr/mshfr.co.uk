@@ -26,7 +26,7 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({ className }) => {
     } else if (trackQuery.isFetching) {
       return <Loading />;
     } else {
-      return <Empty />;
+      return <Empty showFileIcon={true} />;
     }
   };
 
@@ -127,7 +127,7 @@ export const Empty: React.FC<EmptyProps> = ({
 }: EmptyProps) => {
   return (
     <div
-      className="object-cover bg-secondary inline-flex items-center justify-center w-full h-full"
+      className="object-cover bg-background inline-flex items-center justify-center w-full h-full"
       {...props}
     >
       {showFileIcon && <FileWarning className="text-text-400 h-4 w-4" />}

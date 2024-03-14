@@ -5,7 +5,7 @@ import { collaborativeVideoEditingProps } from "../content/CollaborativeVideoEdi
 import { ytSampleGenProps } from "../content/YtSampleGen";
 import { cn } from "../utils/utils";
 import Card from "./ui/Card";
-import { ProjectDialog, ProjectDialogProps } from "./ui/Dialog";
+import { ProjectDialog, ProjectDialogProps } from "./ui/ProjectDialog";
 import { EmojiCallout } from "./ui/EmojiCallout";
 import { IconLinkProps } from "./ui/IconLink";
 import { Link } from "./ui/Link";
