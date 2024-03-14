@@ -104,7 +104,7 @@ function ActivityCard({
   };
 
   const iconClassnames = "h-5 w-5";
-  const delayTime = idx * 100 + "ms";
+  const delayTime = idx * 75 + "ms";
   return (
     <Card
       key={activity.id}

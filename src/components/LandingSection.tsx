@@ -8,7 +8,7 @@ export const LandingSection: React.FC = () => {
       <div className="text-center space-y-4">
         <div className="highlight -z-50"></div>
 
-        <h1 className="text-4xl tracking-tighter font-bold inline-block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+        <h1 className="text-4xl tracking-tighter font-bold inline-block bg-gradient-to-tl from-accent to-primary bg-clip-text text-transparent">
           Hi, I'm Mushfikur.
         </h1>
         <h1 className="text-lg max-w-lg text-text-100">
