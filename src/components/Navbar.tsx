@@ -1,8 +1,6 @@
-import { Clock, Cog } from "lucide-react";
+import { Cog } from "lucide-react";
 import { cn } from "../utils/utils";
 import { Page, Pages } from "./RootLayout";
-import { NowPlaying } from "./NowPlaying";
-import useLondonTime from "../utils/hooks/useLondonTime";
 import Time from "./ui/Time";
 
 interface NavbarProps {

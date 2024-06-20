@@ -1,6 +1,8 @@
-import React, { FC } from "react";
 import {
   Clock1,
+  Clock10,
+  Clock11,
+  Clock12,
   Clock2,
   Clock3,
   Clock4,
@@ -9,10 +11,8 @@ import {
   Clock7,
   Clock8,
   Clock9,
-  Clock10,
-  Clock11,
-  Clock12,
 } from "lucide-react";
+import { FC } from "react";
 import useLondonTime from "../../utils/hooks/useLondonTime";
 
 interface TimeProps {}
