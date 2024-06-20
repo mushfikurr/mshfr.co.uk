@@ -9,7 +9,7 @@ export const Link: React.FC<LinkProps> = ({
   return (
     <a
       className={cn(
-        "group cursor-pointer text-text-100 hover:text-primary transition duration-300 ease-in-out",
+        "group cursor-pointer underline decoration-1 underline-offset-1 text-text-100 hover:text-primary transition duration-300 ease-in-out",
         className
       )}
       target={props.target ?? "_blank"}

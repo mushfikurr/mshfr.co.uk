@@ -10,12 +10,12 @@ html {
 
 .highlight {
   position: absolute;
-  width: 100%;
+  width: 60%;
   height: 80%;
   background: radial-gradient(
     ellipse at center,
     theme("colors.secondary") 0%,
     rgba(0, 0, 0, 0) 70%
   );
-  opacity: 40%;
+  opacity: 30%;
 }

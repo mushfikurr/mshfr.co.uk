@@ -3,10 +3,13 @@ import { useRef, useState } from "react";
 import useObservers from "../utils/hooks/useObservers";
 import { cn } from "../utils/utils";
 import { ContactForm } from "./ContactForm";
-import { ContactLinks, LandingSection } from "./LandingSection";
+import {
+  ContactLinks,
+  LandingIntroduction,
+  LandingHeading,
+} from "./LandingSection";
 import { Navbar } from "./Navbar";
 import { Projects } from "./Projects";
-import { RecentActivity } from "./RecentActivity";
 import { EmojiCallout } from "./ui/EmojiCallout";
 import { IconAnchor } from "./ui/IconButton";
 import { PageContainer } from "./ui/PageContainer";
@@ -50,19 +53,19 @@ export function RootLayout() {
         forwardedRef={pages[Page.Home]}
         id="Home"
       >
-        <div className="max-w-screen-xl py-24 max-sm:py-18">
-          <LandingSection />
+        <div className="max-w-screen-sm w-full py-24 pb-8 max-sm:py-18">
+          <LandingHeading />
         </div>
-        <div className="flex flex-col gap-12 w-full h-full max-w-screen-lg grow">
-          <div className="flex flex-col gap-4 grow">
-            <RecentActivity />
+        <div className="flex flex-col w-full max-w-screen-sm grow">
+          <div className="flex gap-4 grow">
+            <LandingIntroduction />
           </div>
           <div className="flex items-center justify-center w-full">
             <IconAnchor
               Icon={ChevronDown}
               iconClassnames="h-4 w-4"
               className={cn(
-                "hover:translate-y-1 hover:scale-105 hover:bg-primary/30 active:bg-secondary/80 shadow-md",
+                "hover:scale-110 hover:bg-primary/30 active:bg-secondary/80 shadow-md",
                 "bg-gradient-to-br from-secondary/20 to-background/0 backdrop-blur-md border border-text-100/5"
               )}
               href={`#${Page.Projects}`}

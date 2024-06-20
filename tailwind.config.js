@@ -20,6 +20,9 @@ export default {
       },
       animation: {
         background: "background 100s linear infinite",
+        "slide-in-300": "slide-in 1s ease 300ms forwards",
+        "slide-in-500": "slide-in 1s ease 500ms forwards",
+        "slide-in-700": "slide-in 1s ease 700ms forwards",
       },
       keyframes: {
         background: {
@@ -30,6 +33,16 @@ export default {
           "100%": {
             "background-size": "400% 400%",
             "background-position": "100% 100%",
+          },
+        },
+        "slide-in": {
+          from: {
+            opacity: "0",
+            transform: "translateY(-10px)",
+          },
+          to: {
+            opacity: "1",
+            transform: "translateY(0)",
           },
         },
       },

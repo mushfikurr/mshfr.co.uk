@@ -1,11 +1,10 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { AppWindow, ExternalLink, LucideIcon, X } from "lucide-react";
-import { useState } from "react";
+import { ExternalLink, LucideIcon, X } from "lucide-react";
 import { cn } from "../../utils/utils";
 import { Link } from "../Projects";
 import { cardClassnames } from "./Card";
-import { SecondaryButton } from "./SecondaryButton";
 import Chip from "./Chip";
+import { SecondaryButton } from "./SecondaryButton";
 
 interface Technology extends React.ComponentPropsWithoutRef<"a"> {}
 
@@ -15,49 +14,38 @@ export interface ProjectDialogProps {
   imgSrc: string;
   links: Link[];
   techStack: Technology[];
+  children?: React.ReactNode;
 }
 
 export function ProjectDialog({ ...props }: ProjectDialogProps) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleModalOpen = () => setIsOpen(true);
-
   return (
-    <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-      <Dialog.Trigger asChild>
-        <SecondaryButton
-          className="inline-flex gap-2 items-center"
-          onClick={handleModalOpen}
-        >
-          <span className="inline-flex items-center gap-2">
-            <p className="h-full leading-none">Open</p>
-            <AppWindow className="h-4 w-4" />
-          </span>
-        </SecondaryButton>
-      </Dialog.Trigger>
-      <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-background/60 backdrop-blur-sm" />
+    <button className="text-start">
+      <Dialog.Root>
+        <Dialog.Trigger asChild>{props.children}</Dialog.Trigger>
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 flex z-20 bg-background/60 backdrop-blur-sm" />
 
-        <Dialog.Content
-          className={cn(
-            "!fixed !z-50 !top-1/2 !left-1/2 !-translate-x-1/2 !-translate-y-1/2",
-            "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]",
-            cardClassnames,
-            "bg-card/70 backdrop-blur-lg shadow-lg"
-          )}
-        >
-          <Dialog.Close
+          <Dialog.Content
             className={cn(
-              "absolute top-3.5 right-3.5 inline-flex items-center justify-center rounded-full p-1 z-50",
-              "focus:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-opacity-75"
+              "fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
+              "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]",
+              cardClassnames,
+              "bg-card/70 backdrop-blur-lg shadow-lg"
             )}
           >
-            <X className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full text-text-100 hover:text-primary transition-colors duration-200 ease-in-out" />
-          </Dialog.Close>
-          <ProjectDialogContent props={props} />
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog.Root>
+            <Dialog.Close
+              className={cn(
+                "absolute top-3.5 right-3.5 inline-flex items-center justify-center rounded-full p-1 z-50",
+                "focus:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-opacity-75"
+              )}
+            >
+              <X className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full text-text-100 hover:text-primary transition-colors duration-200 ease-in-out" />
+            </Dialog.Close>
+            <ProjectDialogContent props={props} />
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
+    </button>
   );
 }
 

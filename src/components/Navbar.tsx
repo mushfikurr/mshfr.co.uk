@@ -1,7 +1,9 @@
-import { Cog } from "lucide-react";
+import { Clock, Cog } from "lucide-react";
 import { cn } from "../utils/utils";
 import { Page, Pages } from "./RootLayout";
 import { NowPlaying } from "./NowPlaying";
+import useLondonTime from "../utils/hooks/useLondonTime";
+import Time from "./ui/Time";
 
 interface NavbarProps {
   active: Page;
@@ -30,10 +32,9 @@ export function Navbar({ ...props }: NavbarProps) {
   };
 
   return (
-    <ul className="sticky top-0 left-0 z-50 flex gap-6 items-center w-full text-text-400 font-medium bg-background/5 backdrop-blur-sm py-6 border-b border-text-500/5">
+    <ul className="sticky top-0 left-0 z-10 flex gap-6 items-center w-full text-text-400 font-medium bg-background/5 backdrop-blur-sm py-6 border-b border-text-400/5">
       <div className="relative w-full flex gap-6 items-center">
-        <NowPlaying className="absolute pl-8 -top-3" />
-
+        <Time />
         <div className="flex gap-6 items-center w-full justify-center">
           {renderNavbarItems()}
           {SHOW_SETTINGS_FLAG && (
