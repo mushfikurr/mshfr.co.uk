@@ -56,7 +56,7 @@ export function RootLayout() {
         <div className="max-w-screen-sm w-full py-24 pb-8 max-sm:py-18">
           <LandingHeading />
         </div>
-        <div className="flex flex-col w-full max-w-screen-sm grow">
+        <div className="flex flex-col gap-8 w-full max-w-screen-sm grow">
           <div className="flex gap-4 grow">
             <LandingIntroduction />
           </div>
