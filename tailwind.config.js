@@ -20,9 +20,9 @@ export default {
       },
       animation: {
         background: "background 100s linear infinite",
+        "slide-in-150": "slide-in 1s ease 150ms forwards",
         "slide-in-300": "slide-in 1s ease 300ms forwards",
         "slide-in-500": "slide-in 1s ease 500ms forwards",
-        "slide-in-700": "slide-in 1s ease 700ms forwards",
       },
       keyframes: {
         background: {

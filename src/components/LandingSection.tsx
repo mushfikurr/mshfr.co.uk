@@ -5,7 +5,7 @@ import { Link } from "./ui/Link";
 
 export const LandingHeading: React.FC = () => {
   return (
-    <div className="space-y-8 relative animate-slide-in-300 opacity-0">
+    <div className="space-y-8 relative animate-slide-in-150 opacity-0">
       <div className="space-y-2">
         <div className="highlight -z-50"></div>
 
@@ -25,8 +25,8 @@ export const LandingHeading: React.FC = () => {
 
 export const LandingIntroduction: React.FC = () => {
   return (
-    <div className="space-y-12 max-w-prose animate-slide-in-500 opacity-0">
-      <div className="space-y-4 text-text-400">
+    <div className="space-y-14 max-w-prose animate-slide-in-300 opacity-0">
+      <div className="space-y-6 text-text-400">
         <p>
           <span className="text-text-100">
             I am passionate about creating software that feels both organic and
@@ -52,7 +52,7 @@ export const LandingIntroduction: React.FC = () => {
         </p>
       </div>
 
-      <div className="space-y-4 text-text-400 animate-slide-in-700 opacity-0">
+      <div className="space-y-6 text-text-400 animate-slide-in-500 opacity-0">
         <h3 className="font-medium text-text-100 flex items-center">Now</h3>
         <p>
           <span className="text-text-100">
