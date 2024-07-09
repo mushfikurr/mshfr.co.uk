@@ -14,7 +14,7 @@ export function EmojiCallout({
   return (
     <div className="w-full max-w-prose flex gap-4">
       <p>{emoji}</p>
-      <p className={cn("text-text-400", className)} {...props}>
+      <p className={cn("text-text-300", className)} {...props}>
         <span className="text-text-100">{heading}</span> {props.children}
       </p>
     </div>
