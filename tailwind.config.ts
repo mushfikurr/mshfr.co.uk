@@ -1,13 +1,13 @@
-/** @type {import('tailwindcss').Config} */
+import type { Config } from "tailwindcss";
 
-const defaultTheme = require("tailwindcss/defaultTheme");
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
   theme: {
     extend: {
-      fontFamily: {
-        inter: ["Inter", ...defaultTheme.fontFamily.sans],
-      },
       backgroundImage: {
         "background-img": "url('/img/background.png')",
         "landing-img": "url('/img/landing-background.png')",
@@ -73,4 +73,4 @@ export default {
     require("@shrutibalasa/tailwind-grid-auto-fit"),
     require("tailwindcss-animate"),
   ],
-};
+} satisfies Config;

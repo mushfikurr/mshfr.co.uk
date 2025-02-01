@@ -8,11 +8,7 @@ export const ContactForm: React.FC = () => (
     action="https://api.web3forms.com/submit"
     method="POST"
   >
-    <input
-      type="hidden"
-      name="access_key"
-      value={import.meta.env.VITE_FORM_ACCESS_KEY}
-    />
+    <input type="hidden" name="access_key" value="test" />
     <fieldset className="flex flex-col gap-3 group">
       <label
         className="text-text-400

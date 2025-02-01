@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useRef, useEffect, useState, Dispatch } from "react";
 import { cn } from "../../utils/utils";
 

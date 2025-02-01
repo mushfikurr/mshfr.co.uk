@@ -12,6 +12,7 @@ const Chip: FC<ChipProps> = ({ className, children, ...props }) => {
         "bg-gradient-to-br from-secondary/20 to-background/0 hover:text-text-100 hover:bg-primary/30 active:bg-secondary/80",
         "transition-colors ease-in-out duration-300"
       )}
+      target="_blank"
       {...props}
     >
       {children}

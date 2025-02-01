@@ -1,40 +1,46 @@
+"use client";
+
 import { Cog } from "lucide-react";
 import { cn } from "../utils/utils";
-import { Page, Pages } from "./RootLayout";
+import { usePathname } from "next/navigation";
 import Time from "./ui/Time";
 
-interface NavbarProps {
-  active: Page;
-  setActive: React.Dispatch<React.SetStateAction<Page>>;
-  pages: Pages;
-}
+const pages = [
+  { name: "Home", href: "/" },
+  { name: "Projects", href: "/projects" },
+  { name: "Blog", href: "/blog" },
+];
 
-export function Navbar({ ...props }: NavbarProps) {
-  const isItemActive = (page: Page) => props.active === page;
-  const SHOW_SETTINGS_FLAG = false; // Show the settings icon in Navbar
+export function Navbar({ ...props }) {
+  const pathname = usePathname();
 
-  const renderNavbarItems = () => {
-    const renderedItems = [];
-    for (const key in props.pages) {
-      renderedItems.push(
-        <NavbarItem
-          active={isItemActive(Page[key as keyof typeof Page])}
-          key={key}
-          href={`#${Page[key as keyof typeof Page]}`}
-        >
-          {key}
-        </NavbarItem>
-      );
-    }
-    return renderedItems;
-  };
+  const isItemActive = (href: string) => pathname === href;
+
+  const SHOW_SETTINGS_FLAG = false;
 
   return (
-    <ul className="sticky top-0 left-0 z-10 flex gap-6 items-center w-full text-text-400 font-medium bg-background/5 backdrop-blur-sm py-6 border-b border-text-400/5">
-      <div className="relative w-full flex gap-6 items-center">
-        <Time />
-        <div className="flex gap-6 items-center w-full justify-center">
-          {renderNavbarItems()}
+    <ul className="sticky top-0 left-0 z-10 flex items-center w-full text-text-400 font-medium bg-background/5 backdrop-blur-sm py-6 border-b border-text-400/5">
+      <div className="relative w-full flex items-center justify-between">
+        {/* Left: Time */}
+        <div className="flex items-center">
+          <Time />
+        </div>
+
+        {/* Center: Navbar Items */}
+        <div className="flex gap-6 items-center">
+          {pages.map((p) => (
+            <NavbarItem
+              active={isItemActive(p.href)}
+              key={p.name}
+              href={p.href}
+            >
+              {p.name}
+            </NavbarItem>
+          ))}
+        </div>
+
+        {/* Right: Settings */}
+        <div className="flex items-center">
           {SHOW_SETTINGS_FLAG && (
             <li
               className={cn(
