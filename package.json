@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "script:sync": "node --no-warnings --loader ts-node/esm --require tsconfig-paths/register scripts/syncPosts.ts"
+    "script:sync": "node --no-warnings --loader ts-node/esm --require tsconfig-paths/register scripts/syncPosts.ts",
+    "script:drop": "node --no-warnings --loader ts-node/esm --require tsconfig-paths/register scripts/dropPosts.ts"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
