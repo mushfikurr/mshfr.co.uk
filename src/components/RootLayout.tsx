@@ -11,6 +11,7 @@ import { Projects } from "./Projects";
 import { EmojiCallout } from "./ui/EmojiCallout";
 import { IconAnchor } from "./ui/IconButton";
 import { PageContainer } from "./ui/PageContainer";
+import { QUERIES } from "@/lib/db/queries";
 
 export enum Page {
   Home = "Home",
@@ -19,7 +20,8 @@ export enum Page {
 }
 export type Pages = Record<Page, React.RefObject<HTMLDivElement>>;
 
-export function RootLayout() {
+export async function RootLayout() {
+  const projects = await QUERIES.getPostsByType("projects");
   return (
     <div className="">
       <Navbar />
@@ -49,7 +51,7 @@ export function RootLayout() {
 
       <PageContainer id="Projects">
         <div className="max-w-prose w-full h-full flex flex-col gap-8">
-          <Projects />
+          <Projects posts={projects} />
         </div>
       </PageContainer>
 
