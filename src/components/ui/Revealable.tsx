@@ -1,17 +1,17 @@
-import React, { useRef, useEffect, useState, Dispatch } from "react";
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
 import { cn } from "../../utils/utils";
 
 interface RevealableProps extends React.ComponentPropsWithRef<"div"> {
   initialDisplayedContent: React.ReactNode;
   expanded: boolean;
-  setExpanded: React.SetStateAction<Dispatch<boolean>>;
 }
 
 export function Revealable({
   className,
   initialDisplayedContent,
   expanded,
-  setExpanded,
   ...props
 }: RevealableProps) {
   const visibleRef = useRef<HTMLDivElement>(null);

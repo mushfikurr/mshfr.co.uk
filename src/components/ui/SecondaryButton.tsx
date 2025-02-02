@@ -1,12 +1,12 @@
 import { cn } from "../../utils/utils";
 
-interface SecondaryButtonProps extends React.ComponentPropsWithRef<"button"> {}
-
-export const SecondaryButton: React.FC<SecondaryButtonProps> = ({
+export const SecondaryButton: React.FC<
+  React.ComponentPropsWithRef<"button">
+> = ({
   className,
   children,
   ...props
-}: SecondaryButtonProps) => {
+}: React.ComponentPropsWithRef<"button">) => {
   return (
     <button
       className={cn(

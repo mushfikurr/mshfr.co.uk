@@ -1,16 +1,13 @@
+"use client";
+
 import { AppWindow, ArrowDownFromLine, ArrowUpFromLine } from "lucide-react";
 import { useRef, useState } from "react";
-import { bookalProps } from "../content/Bookal";
-import { collaborativeVideoEditingProps } from "../content/CollaborativeVideoEditing";
-import { ytSampleGenProps } from "../content/YtSampleGen";
 import { cn } from "../utils/utils";
 import Card from "./ui/Card";
 import { EmojiCallout } from "./ui/EmojiCallout";
-import { IconLinkProps } from "./ui/IconLink";
 import { PrimaryButton } from "./ui/PrimaryButton";
-import { ProjectDialog, ProjectDialogProps } from "./ui/ProjectDialog";
 import { Revealable } from "./ui/Revealable";
-import { personalWebsiteProps } from "../content/PersonalWebsite";
+import Link from "next/link";
 
 export const Projects: React.FC = () => {
   const [expanded, setExpanded] = useState(false);
@@ -19,10 +16,8 @@ export const Projects: React.FC = () => {
 
   const initialDisplayedContent = (
     <>
-      <ProjectCard {...bookalProps} />
-      <ProjectCard {...collaborativeVideoEditingProps} />
-      <ProjectCard {...ytSampleGenProps} />
-      <ProjectCard {...personalWebsiteProps} />
+      <ProjectCard title="Velvara" summary="Test" href="projects/velvara" />
+      <ProjectCard title="Velvara" summary="Test" href="/velvara" />
     </>
   );
 
@@ -32,8 +27,8 @@ export const Projects: React.FC = () => {
 
   return (
     <div className="flex flex-col h-full gap-8 overflow-y-auto">
-      <div className="space-y-2">
-        <h1 className="text-3xl font-semibold pt-8 tracking-tight">Projects</h1>
+      <div className="space-y-3">
+        <h1 className="text-3xl font-semibold tracking-tight">Projects</h1>
         <EmojiCallout emoji={"📌"} heading="I'm a project driven person.">
           Below are products I have worked on meticulously that have allowed me
           to solidify my skills, and each solve a problem that I have
@@ -44,7 +39,6 @@ export const Projects: React.FC = () => {
         <Revealable
           initialDisplayedContent={initialDisplayedContent}
           expanded={expanded}
-          setExpanded={setExpanded}
           className={"flex flex-col gap-6"}
         ></Revealable>
       </div>
@@ -69,19 +63,19 @@ export const Projects: React.FC = () => {
   );
 };
 
-export interface Link extends IconLinkProps {
+interface ProjectCardProps extends React.ComponentPropsWithoutRef<"div"> {
   title: string;
+  summary: string;
+  href: string;
 }
 
-export interface ProjectCardProps extends ProjectDialogProps {
-  summary: string;
-}
 const ProjectCard: React.FC<ProjectCardProps> = ({
+  title,
   summary,
-  ...dialogProps
+  href,
 }: ProjectCardProps) => {
   return (
-    <ProjectDialog {...dialogProps} key={dialogProps.title}>
+    <Link href={href}>
       <Card
         className={cn(
           "flex flex-col gap-3 justify-between grow overflow-y-auto shadow-md py-6 px-5",
@@ -90,10 +84,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         )}
       >
         <div className="space-y-1.5">
-          <span className="flex items-center justify-between group">
-            <h3 className="text-base font-medium">{dialogProps.title}</h3>
+          <div className="flex items-center justify-between group">
+            <h3 className="text-base font-medium">{title}</h3>
             <AppWindow className="h-4 w-4" />
-          </span>
+          </div>
 
           <p
             className={cn(
@@ -104,6 +98,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </p>
         </div>
       </Card>
-    </ProjectDialog>
+    </Link>
   );
 };

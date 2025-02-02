@@ -10,7 +10,7 @@ export const LandingHeading: React.FC = () => {
         <div className="highlight -z-50"></div>
 
         <h1 className="text-4xl tracking-tighter font-bold inline-block bg-gradient-to-tl from-accent to-primary bg-clip-text text-transparent">
-          Hi, I'm Mushfikur.
+          {"Hi, I'm Mushfikur."}
         </h1>
         <h1 className="text-lg max-w-prose text-text-100">
           A full-stack, London based developer passionate about crafting refined
@@ -71,11 +71,10 @@ export const LandingIntroduction: React.FC = () => {
   );
 };
 
-interface ContactLinksProps extends React.ComponentPropsWithoutRef<"div"> {}
-export const ContactLinks: React.FC<ContactLinksProps> = ({
+export const ContactLinks: React.FC<React.ComponentPropsWithoutRef<"div">> = ({
   className,
   ...props
-}: ContactLinksProps) => {
+}: React.ComponentPropsWithoutRef<"div">) => {
   return (
     <div className={cn("flex items-center w-full gap-3", className)} {...props}>
       <IconLink
