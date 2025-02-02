@@ -21,7 +21,7 @@ export default function ChipStack({
       {...props}
     >
       {stack.map((s) => (
-        <Chip {...s} />
+        <Chip key={s.href} {...s} />
       ))}
     </div>
   );

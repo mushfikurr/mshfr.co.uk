@@ -1,13 +1,10 @@
 import { cn } from "../../utils/utils";
 
-interface PageContainerProps extends React.ComponentPropsWithoutRef<"div"> {
-}
-
 export function PageContainer({
   className,
   children,
   ...props
-}: PageContainerProps) {
+}: React.ComponentPropsWithoutRef<"div">) {
   return (
     <div
       className={cn("min-h-screen flex flex-col h-full", className)}

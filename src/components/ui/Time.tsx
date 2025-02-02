@@ -15,9 +15,7 @@ import {
 import { FC } from "react";
 import useLondonTime from "../../utils/hooks/useLondonTime";
 
-interface TimeProps {}
-
-const Time: FC<TimeProps> = ({}) => {
+const Time: FC = () => {
   const londonTime = useLondonTime();
   const currentHour = new Date().toLocaleString("en-GB", {
     hour: "numeric",

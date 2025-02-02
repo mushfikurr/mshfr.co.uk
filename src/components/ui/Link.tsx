@@ -1,11 +1,9 @@
 import { cn } from "../../utils/utils";
 
-export interface LinkProps extends React.ComponentPropsWithoutRef<"a"> {}
-
-export const Link: React.FC<LinkProps> = ({
+export const Link: React.FC<React.ComponentPropsWithoutRef<"a">> = ({
   className,
   ...props
-}: LinkProps) => {
+}: React.ComponentPropsWithoutRef<"a">) => {
   return (
     <a
       className={cn(

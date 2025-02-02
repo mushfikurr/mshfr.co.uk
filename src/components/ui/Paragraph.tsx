@@ -1,8 +1,9 @@
 import { cn } from "@/utils/utils";
 
-interface ParagraphProps extends React.ComponentPropsWithoutRef<"p"> {}
-
-export default function Paragraph({ className, ...props }: ParagraphProps) {
+export default function Paragraph({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"p">) {
   return (
     <p
       className={cn(

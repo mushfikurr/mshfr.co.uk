@@ -11,7 +11,7 @@ const pages = [
   { name: "Blog", href: "/blog" },
 ];
 
-export function Navbar({ ...props }) {
+export function Navbar() {
   const segments = useSelectedLayoutSegments();
 
   const isItemActive = (href: string) => {

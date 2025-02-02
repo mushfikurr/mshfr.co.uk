@@ -1,9 +1,11 @@
 import { FC } from "react";
 import { cn } from "../../utils/utils";
 
-interface ChipProps extends React.ComponentPropsWithoutRef<"a"> {}
-
-const Chip: FC<ChipProps> = ({ className, children, ...props }) => {
+const Chip: FC<React.ComponentPropsWithoutRef<"a">> = ({
+  className,
+  children,
+  ...props
+}) => {
   return (
     <a
       className={cn(

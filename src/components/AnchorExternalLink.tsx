@@ -7,7 +7,6 @@ interface AnchorExternalLinkProps extends React.ComponentPropsWithoutRef<"a"> {
 }
 
 export function AnchorExternalLink({
-  className,
   href,
   Icon = LinkIcon,
   ...props

@@ -39,7 +39,6 @@ export const Projects: React.FC = () => {
         <Revealable
           initialDisplayedContent={initialDisplayedContent}
           expanded={expanded}
-          setExpanded={setExpanded}
           className={"flex flex-col gap-6"}
         ></Revealable>
       </div>

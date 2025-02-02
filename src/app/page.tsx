@@ -4,7 +4,6 @@ import {
   LandingHeading,
   LandingIntroduction,
 } from "@/components/LandingSection";
-import { Navbar } from "@/components/Navbar";
 import { Projects } from "@/components/Projects";
 import { EmojiCallout } from "@/components/ui/EmojiCallout";
 import { IconAnchor } from "@/components/ui/IconButton";
