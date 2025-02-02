@@ -36,5 +36,5 @@ jobs:
           npm install
       
       - name: Run sync script
-        run: node --loader ts-node/esm src/scripts/syncPosts.ts
+        run: npx ts-node --transpile-only src/scripts/syncPosts.ts
 
