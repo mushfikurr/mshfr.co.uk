@@ -33,5 +33,5 @@ jobs:
           npm install
 
       - name: Run sync script
-        run: |
-          npx ts-node src/scripts/syncPosts.ts
+        run: npx ts-node ${{ github.workspace }}/src/scripts/syncPosts.ts
+
