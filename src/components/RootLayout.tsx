@@ -1,12 +1,10 @@
 import { ChevronDown } from "lucide-react";
-import { useRef, useState } from "react";
-import useObservers from "../utils/hooks/useObservers";
 import { cn } from "../utils/utils";
 import { ContactForm } from "./ContactForm";
 import {
   ContactLinks,
-  LandingIntroduction,
   LandingHeading,
+  LandingIntroduction,
 } from "./LandingSection";
 import { Navbar } from "./Navbar";
 import { Projects } from "./Projects";
@@ -22,37 +20,11 @@ export enum Page {
 export type Pages = Record<Page, React.RefObject<HTMLDivElement>>;
 
 export function RootLayout() {
-  const pages: Pages = {
-    [Page.Home]: useRef<HTMLDivElement>(null),
-    [Page.Projects]: useRef<HTMLDivElement>(null),
-    [Page.Contact]: useRef<HTMLDivElement>(null),
-  };
-
-  const [active, setActive] = useState<Page>(Page.Home);
-  useObservers({
-    targetRefs: Object.values(pages),
-    callback: (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const pageTypeStr = entry.target.id;
-          const pageType = Page[pageTypeStr as keyof typeof Page];
-          if (pageType !== undefined) {
-            setActive(pageType);
-          }
-        }
-      });
-    },
-  });
-
   return (
     <div className="">
-      <Navbar active={active} pages={pages} setActive={setActive} />
+      <Navbar />
 
-      <PageContainer
-        className="-mt-[5.6rem]"
-        forwardedRef={pages[Page.Home]}
-        id="Home"
-      >
+      <PageContainer className="-mt-[5.6rem]" id="Home">
         <div className="max-w-screen-sm w-full py-24 pb-8 max-sm:pt-10">
           <LandingHeading />
         </div>
@@ -75,13 +47,13 @@ export function RootLayout() {
         </div>
       </PageContainer>
 
-      <PageContainer forwardedRef={pages[Page.Projects]} id="Projects">
+      <PageContainer id="Projects">
         <div className="max-w-prose w-full h-full flex flex-col gap-8">
           <Projects />
         </div>
       </PageContainer>
 
-      <PageContainer forwardedRef={pages[Page.Contact]} id="Contact">
+      <PageContainer id="Contact">
         <div className="max-w-prose w-full h-full flex flex-col gap-8">
           <div className="flex flex-col gap-8">
             <div className="space-y-6">
