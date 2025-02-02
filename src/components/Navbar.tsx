@@ -1,8 +1,8 @@
 "use client";
 
 import { Cog } from "lucide-react";
+import { useSelectedLayoutSegments } from "next/navigation";
 import { cn } from "../utils/utils";
-import { usePathname } from "next/navigation";
 import Time from "./ui/Time";
 
 const pages = [
@@ -12,14 +12,27 @@ const pages = [
 ];
 
 export function Navbar({ ...props }) {
-  const pathname = usePathname();
+  const segments = useSelectedLayoutSegments();
 
-  const isItemActive = (href: string) => pathname === href;
+  const isItemActive = (href: string) => {
+    // Normalize the href by removing leading and trailing slashes
+    const normalizedHref = href.replace(/^\/+|\/+$/g, "");
+
+    // Handle the case for the root path "/"
+    if (normalizedHref === "") {
+      // For the root path, check if segments are empty (root of the site)
+      return segments.length === 0;
+    }
+
+    // For other paths, check if the first segment matches
+    // Make sure to join the segments and check if it starts with the href
+    return segments.join("/").startsWith(normalizedHref);
+  };
 
   const SHOW_SETTINGS_FLAG = false;
 
   return (
-    <ul className="sticky top-0 left-0 z-10 flex items-center w-full text-text-400 font-medium bg-background/5 backdrop-blur-sm py-6 border-b border-text-400/5">
+    <ul className="sticky top-0 left-0 z-10 flex items-center w-full text-text-400 font-medium bg-background/5 backdrop-blur-sm py-8 border-b border-text-400/5">
       <div className="relative w-full flex items-center justify-between">
         {/* Left: Time */}
         <div className="flex items-center">
@@ -27,16 +40,22 @@ export function Navbar({ ...props }) {
         </div>
 
         {/* Center: Navbar Items */}
-        <div className="flex gap-6 items-center">
-          {pages.map((p) => (
-            <NavbarItem
-              active={isItemActive(p.href)}
-              key={p.name}
-              href={p.href}
-            >
-              {p.name}
-            </NavbarItem>
-          ))}
+        <div className="absolute flex justify-center items-center w-full">
+          <div className="max-w-screen-md">
+            <div className="flex gap-6 max-w-screen-sm">
+              {pages.map((p) => {
+                return (
+                  <NavbarItem
+                    active={isItemActive(p.href)}
+                    key={p.name}
+                    href={p.href}
+                  >
+                    {p.name}
+                  </NavbarItem>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
         {/* Right: Settings */}

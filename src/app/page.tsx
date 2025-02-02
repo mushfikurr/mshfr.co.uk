@@ -48,7 +48,7 @@ export default function Home() {
         <div className="max-w-prose w-full h-full flex flex-col gap-8">
           <div className="flex flex-col gap-8">
             <div className="space-y-6">
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <h1 className="text-3xl font-semibold pt-8 text-text-100 tracking-tight">
                   Contact
                 </h1>

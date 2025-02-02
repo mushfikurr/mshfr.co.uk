@@ -1,5 +1,5 @@
 import { Projects } from "@/components/Projects";
 
 export default async function ProjectsPage() {
-  return <Projects />;
+  return <div>Blog</div>;
 }

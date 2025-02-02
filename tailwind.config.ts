@@ -72,5 +72,6 @@ export default {
   plugins: [
     require("@shrutibalasa/tailwind-grid-auto-fit"),
     require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
   ],
 } satisfies Config;

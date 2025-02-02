@@ -1,0 +1,74 @@
+---
+title: "How I built Velvara, an e-commerce store for perfume oil"
+description: "The behind the scenes of building a premium perfume oil fragrance store."
+date: "01/02/2025"
+openGraphImage: "/img/velvara-screenshot.png"
+---
+
+<HeaderImage
+  src="/img/velvara-screenshot.png"
+  alt="Screenshot of Velvara on desktop."
+/>
+
+# How I built Velvara, an e-commerce store for perfume oil
+
+<AnchorExternalLink title="Visit Velvara" href="https://velvara.co.uk" />
+
+<Divider />
+
+##### Velvara is an online fragrance store specialising in premium perfume oils.
+
+It started with me and a few friends. We really enjoyed perfumes and we were surprised to find that perfume oils weren’t as popular as we thought. We wanted to create a platform that would allow us to share our love for perfumes with the world, and we created Velvara.
+
+As the software engineer of the group, I was tasked with the development of the website. I, as most software engineers, thought it would be a simple task. It's 2025 right? Surely there are a million solutions to this problem...
+
+Boy, was I wrong. I had to research the backend, checkout flows, the designs, and the millions of other things that you may overlook when building an e-commerce solution. Additionally, I was a one-man team. So I had to get to work.
+
+## Implementation Details
+
+The core idea was to build an e-commerce platform that was simple, intuitive, and efficient, while offering premium quality products. It needed to be extensible, scalable, and customizable. I wanted to create a platform that would allow me to focus on the unique aspects of the project, without being limited by the constraints of the vendor.
+
+I chose [Medusa.js](https://medusajs.com/), a headless e-commerce framework, to power the backend. Medusa gave me the flexibility to create custom workflows, integrate with various systems, and scale the platform as needed. The backend was paired with [Next.js](https://nextjs.org/) for the frontend, ensuring a performant, SEO-friendly experience.
+
+The user experience was paramount. I focused on designing a sleek, minimalistic storefront that would allow the perfumes to be the highlight. Using [Tailwind CSS](https://tailwindcss.com/) for styling, I ensured the website was responsive and looked great on any device. This allowed me to deliver an elegant shopping experience that doesn’t distract from the main products.
+
+One of the core features I wanted to integrate was easy payment solutions. With this in mind, I integrated [Stripe](https://stripe.com/) to handle payments smoothly, ensuring customers could easily and securely make purchases. Additionally, I leveraged [Medusa’s API](https://medusajs.com/docs/) to sync inventory and process orders, making the backend operations seamless.
+
+## Why Medusa?
+
+Choosing Medusa was not an easy decision. I needed a flexible and customizable platform that would let me build features without restrictions. With Medusa, I was able to focus on the unique aspects of Velvara without needing to reinvent the wheel. I was also able to leverage the vast JavaScript ecosystem to integrate with third-party services, like an email system and inventory syncing solutions. Many other vendors were available, but Medusa seemed to be the most integrated with Next.js and the type of stack I had in mind.
+
+## Self-Hosting with Coolify
+
+One of the key decisions I made for Velvara was to self-host the platform using [Coolify](https://coolify.io/). Coolify is an open-source PaaS (Platform as a Service) that makes it easy to deploy and manage applications, particularly when you want to host them yourself without the complexity of managing infrastructure manually.
+
+### Why Coolify?
+
+Coolify offers a simple and intuitive UI that abstracts much of the complexity of managing deployment pipelines, scaling, and monitoring. It’s also self-hostable, meaning you can run it on your own server without worrying about third-party limitations. This aligns perfectly with my goal of maintaining full control over the project while keeping it affordable and customizable.
+
+By deploying Velvara on Coolify, I was able to easily set up both the frontend and backend. Coolify offers automatic deployments with Git integration, so every time I push new changes to the repository, Coolify takes care of building and deploying the updates.
+
+### Setting Up Coolify
+
+Setting up Velvara on Coolify was straightforward:
+
+1. **Server Setup**: First, I set up a server on [Hetzner](https://www.hetzner.com/), ensuring it had the resources I needed. With 16GB RAM, the server could comfortably handle both the frontend and backend without performance issues.
+2. **Installing Coolify**: I followed the simple installation guide on Coolify’s documentation to install it on my server. This involved using Docker, which Coolify uses for containerized deployments.
+
+3. **Connecting Repositories**: After the installation, I connected my GitHub repositories to Coolify, allowing it to pull the latest code for both the frontend and backend.
+
+4. **Environment Configuration**: Coolify allowed me to configure the environment variables directly from its interface, so I could easily configure settings for Medusa, Next.js, and other integrations (like Stripe and email services).
+
+5. **Automated Deployments**: With Git integration in place, Coolify automatically triggered deployments every time I pushed changes to the repository, keeping the website up-to-date without manual intervention.
+
+6. **Scaling and Monitoring**: Coolify’s dashboard gave me the ability to scale the app as needed. I could monitor performance and resource usage, ensuring the platform was always responsive.
+
+Using Coolify has greatly simplified the hosting process and given me peace of mind about maintaining and scaling Velvara. The ability to control my infrastructure while having automated deployments and monitoring at my fingertips is invaluable for a growing platform like Velvara.
+
+## The Future of Velvara
+
+Building Velvara was just the beginning. I’ve already begun exploring new features, including subscription services for regular fragrance deliveries, personalized perfume recommendations, and integrating more diverse product offerings. The goal is to provide customers with an immersive shopping experience while maintaining high standards of quality and customer satisfaction.
+
+As the platform grows, I’ll continue to prioritize user experience, performance, and scalability. I’m excited to see where Velvara will go.
+
+##### It was a very valuable project to build from the ground up.
