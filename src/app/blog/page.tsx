@@ -5,8 +5,8 @@ export default async function ProjectsPage() {
     <div className="space-y-3">
       <h1 className="text-3xl font-semibold tracking-tight">Recent Posts</h1>
       <EmojiCallout emoji={"🖊️"} heading="Writing is the key to understanding.">
-        Recently, I've had the urge to write down my thoughts and ideas. Below
-        are some of the things I've written.
+        Recently, I&pos;ve had the urge to write down my thoughts and ideas.
+        Below are some of the things I&pos;ve written about.
       </EmojiCallout>
     </div>
   );
