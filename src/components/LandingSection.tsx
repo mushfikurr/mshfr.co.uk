@@ -71,11 +71,10 @@ export const LandingIntroduction: React.FC = () => {
   );
 };
 
-interface ContactLinksProps extends React.ComponentPropsWithoutRef<"div"> {}
-export const ContactLinks: React.FC<ContactLinksProps> = ({
+export const ContactLinks: React.FC<React.ComponentPropsWithoutRef<"div">> = ({
   className,
   ...props
-}: ContactLinksProps) => {
+}: React.ComponentPropsWithoutRef<"div">) => {
   return (
     <div className={cn("flex items-center w-full gap-3", className)} {...props}>
       <IconLink

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState, Dispatch } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { cn } from "../../utils/utils";
 
 interface RevealableProps extends React.ComponentPropsWithRef<"div"> {
