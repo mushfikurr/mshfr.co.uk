@@ -8,10 +8,13 @@ import { Projects } from "@/components/Projects";
 import { EmojiCallout } from "@/components/ui/EmojiCallout";
 import { IconAnchor } from "@/components/ui/IconButton";
 import { PageContainer } from "@/components/ui/PageContainer";
+import { QUERIES } from "@/lib/db/queries";
 import { cn } from "@/utils/utils";
 import { ChevronDown } from "lucide-react";
 
-export default function Home() {
+export default async function Home() {
+  const projects = await QUERIES.getPostsByType("projects");
+
   return (
     <div>
       <PageContainer className="-mt-[5.6rem]" id="Home">
@@ -39,7 +42,7 @@ export default function Home() {
 
       <PageContainer id="Projects">
         <div className="max-w-prose w-full h-full flex flex-col gap-8">
-          <Projects />
+          <Projects posts={projects} />
         </div>
       </PageContainer>
 

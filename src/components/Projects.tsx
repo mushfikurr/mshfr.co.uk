@@ -1,23 +1,39 @@
 "use client";
 
+import { blogPosts } from "@/lib/db/schema";
 import { AppWindow, ArrowDownFromLine, ArrowUpFromLine } from "lucide-react";
+import Link from "next/link";
 import { useRef, useState } from "react";
 import { cn } from "../utils/utils";
 import Card from "./ui/Card";
 import { EmojiCallout } from "./ui/EmojiCallout";
 import { PrimaryButton } from "./ui/PrimaryButton";
 import { Revealable } from "./ui/Revealable";
-import Link from "next/link";
 
-export const Projects: React.FC = () => {
+type BlogPost = typeof blogPosts.$inferSelect;
+interface ProjectsProps {
+  posts: BlogPost[];
+}
+
+export const Projects: React.FC<ProjectsProps> = ({ posts }: ProjectsProps) => {
   const [expanded, setExpanded] = useState(false);
   const showMoreBtnRef = useRef<HTMLButtonElement>(null);
   const HIDE_SHOW_MORE = true; // Flag for hiding the show more button. If there are more than three projects, set this to false.
 
   const initialDisplayedContent = (
     <>
-      <ProjectCard title="Velvara" summary="Test" href="projects/velvara" />
-      <ProjectCard title="Velvara" summary="Test" href="/velvara" />
+      {posts.map((p) => {
+        console.log(p.createdAt);
+        return (
+          <ProjectCard
+            key={p.slug}
+            title={p.title}
+            summary={p.description}
+            href={p.slug}
+            date={p.createdAt}
+          />
+        );
+      })}
     </>
   );
 
@@ -67,13 +83,18 @@ interface ProjectCardProps extends React.ComponentPropsWithoutRef<"div"> {
   title: string;
   summary: string;
   href: string;
+  date: bigint;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   summary,
   href,
+  date,
 }: ProjectCardProps) => {
+  function parseTimestamp(timestamp: bigint): Date {
+    return new Date(Number(timestamp) * 1000);
+  }
   return (
     <Link href={href}>
       <Card
@@ -95,6 +116,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             )}
           >
             {summary}
+          </p>
+          <p
+            className={cn(
+              "text-text-300 line-clamp-2 text-sm max-sm:line-clamp-none pt-2"
+            )}
+          >
+            {parseTimestamp(date).toLocaleString("en-GB").split(",")[0]}
           </p>
         </div>
       </Card>

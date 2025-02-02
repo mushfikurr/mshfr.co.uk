@@ -23,6 +23,14 @@ export const QUERIES = {
       .limit(1);
     return post.length > 0;
   },
+
+  getPostsByType: async function (type: "projects" | "blog") {
+    const posts = await db
+      .select()
+      .from(blogPostsSchema)
+      .where(eq(blogPostsSchema.type, type))
+    return posts;
+  },
 };
 
 export const MUTATIONS = {
