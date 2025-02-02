@@ -8,7 +8,11 @@ export interface FrontmatterMetadata {
   openGraphImage?: string;
 }
 
-export const generateMetadata = async ({ params }: any) => {
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { slug: string };
+}) => {
   const { slug } = params;
   const { metadata } = await getProjectData(slug);
 
