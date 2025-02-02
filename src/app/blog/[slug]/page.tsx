@@ -8,12 +8,12 @@ export interface FrontmatterMetadata {
   openGraphImage?: string;
 }
 
-interface ProjectPageParams {
-  slug: string;
-}
-
-export const generateMetadata = async (params: { slug: string }) => {
-  const { slug } = params;
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) => {
+  const slug = (await params).slug;
   const { metadata } = await getBlogData(slug);
 
   return metadata;
@@ -22,15 +22,14 @@ export const generateMetadata = async (params: { slug: string }) => {
 export default async function ProjectPage({
   params,
 }: {
-  params: ProjectPageParams;
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = params;
+  const slug = (await params).slug;
   const { mdxSource } = await getBlogData(slug);
 
   if (!slug || !mdxSource?.compiledSource) {
     return notFound();
   }
 
-  // Render the MDX content
   return <MDXContent mdxSource={mdxSource} />;
 }
