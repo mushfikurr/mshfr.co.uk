@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "content/**"
+      - "src/app/content/**"
       - "scripts/syncPosts.ts"
 
 jobs:
