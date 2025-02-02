@@ -4,7 +4,6 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -14,21 +13,26 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    "plugins": [{ "name": "next" }],
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": ["./src/*"],
+      "drizzle/*": ["./drizzle/*"] // Add Drizzle schema path if needed
+    },
+    // Add these for script compatibility
+    "types": ["node"],
+    "baseUrl": "."
+  },
+  "ts-node": {
+    // TS-Node specific config (doesn't affect Next.js)
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/scripts/syncPosts.ts"
+    "scripts/syncPosts.ts"
   ],
   "exclude": ["node_modules"]
 }

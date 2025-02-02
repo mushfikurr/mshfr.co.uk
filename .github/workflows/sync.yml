@@ -1,0 +1,39 @@
+name: Sync Content to Database
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "content/**"
+      - "scripts/syncPosts.ts"
+
+jobs:
+  sync-posts:
+    name: Sync MDX content
+    runs-on: ubuntu-latest
+    environment: mshfr.co.uk
+    defaults:
+      run:
+        working-directory: .
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run sync script
+        env:
+          SINGLESTORE_HOST: ${{ secrets.SINGLESTORE_HOST }}
+          SINGLESTORE_USER: ${{ secrets.SINGLESTORE_USER }}
+          SINGLESTORE_PASSWORD: ${{ secrets.SINGLESTORE_PASSWORD }}
+          SINGLESTORE_PORT: ${{ secrets.SINGLESTORE_PORT }}
+          SINGLESTORE_DATABASE: ${{ secrets.SINGLESTORE_DATABASE }}
+        run: npm run script:sync
