@@ -14,6 +14,7 @@ export const HeaderImage = ({ src, alt, ...rest }: HeaderImageProps) => {
         objectFit="cover"
         objectPosition="top"
         className="absolute top-0 left-0 rounded-lg drop-shadow-lg"
+        priority={true}
         {...rest}
       />
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-background/40 via-transparent to-transparent" />
