@@ -26,7 +26,7 @@ jobs:
           node-version: '16'
 
       - name: Install latest ts-node
-        run: npm install -g ts-node@latest
+        run: npm install ts-node @types/node --save-dev
 
       - name: Debug - List files
         run: ls -R src/scripts
