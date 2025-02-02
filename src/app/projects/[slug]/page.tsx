@@ -11,9 +11,9 @@ export interface FrontmatterMetadata {
 export const generateMetadata = async ({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) => {
-  const { slug } = params;
+  const slug = (await params).slug;
   const { metadata } = await getProjectData(slug);
 
   return metadata;
@@ -22,9 +22,9 @@ export const generateMetadata = async ({
 export default async function ProjectPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params;
+  const slug = (await params).slug;
   const { mdxSource } = await getProjectData(slug);
 
   if (!slug || !mdxSource?.compiledSource) {
