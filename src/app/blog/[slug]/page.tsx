@@ -8,11 +8,7 @@ export interface FrontmatterMetadata {
   openGraphImage?: string;
 }
 
-interface ProjectPageParams {
-  slug: string;
-}
-
-export const generateMetadata = async (params: ProjectPageParams) => {
+export const generateMetadata = async (params: { slug: string }) => {
   const { slug } = params;
   const { metadata } = await getBlogData(slug);
 
@@ -22,7 +18,7 @@ export const generateMetadata = async (params: ProjectPageParams) => {
 export default async function ProjectPage({
   params,
 }: {
-  params: ProjectPageParams;
+  params: { slug: string };
 }) {
   const { slug } = params;
   const { mdxSource } = await getBlogData(slug);
