@@ -30,12 +30,14 @@ export const MUTATIONS = {
     title: string,
     description: string,
     slug: string,
+    type: "projects" | "blog",
     date: number
   ) {
     return db.insert(blogPostsSchema).values({
       title,
       description,
       slug,
+      type,
       createdAt: BigInt(date),
     });
   },

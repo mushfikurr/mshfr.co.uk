@@ -13,5 +13,8 @@ export const blogPosts = createTable("blog_posts", {
   title: text("title").notNull(),
   description: text("description").notNull(),
   slug: text("slug").notNull(),
+  type: text("type").$type<"projects" | "blog">().notNull(), // 👈 Type-safe text column
   createdAt: bigint("created_at", { mode: "bigint" }).notNull(),
 });
+
+export type PostType = typeof blogPosts.$inferInsert.type;

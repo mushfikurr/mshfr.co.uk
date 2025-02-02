@@ -5,6 +5,7 @@ import { blogPosts } from "../src/lib/db/schema";
 import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
+import { and, eq } from "drizzle-orm";
 
 const CONTENT_DIR = path.join(process.cwd(), "src/app/content");
 const ALLOWED_DIRECTORIES = ["projects", "blog"];
@@ -32,6 +33,16 @@ function parseDate(dateString: string): bigint {
   return BigInt(Math.floor(date.getTime() / 1000));
 }
 
+async function isSlugUnique(db: any, slug: string, type: "blog" | "projects") {
+  const existing = await db
+    .select()
+    .from(blogPosts)
+    .where(and(eq(blogPosts.slug, slug), eq(blogPosts.type, type)))
+    .limit(1);
+
+  return existing.length === 0;
+}
+
 async function main() {
   const connection = await createConnection({
     host: process.env.SINGLESTORE_HOST,
@@ -47,7 +58,7 @@ async function main() {
 
   for await (const filePath of walk(CONTENT_DIR)) {
     const relativePath = path.relative(CONTENT_DIR, filePath);
-    const directory = relativePath.split(path.sep)[0];
+    const directory = relativePath.split(path.sep)[0] as "blog" | "projects";
 
     if (!ALLOWED_DIRECTORIES.includes(directory)) continue;
 
@@ -61,14 +72,20 @@ async function main() {
         .split(path.sep)
         .join("/");
 
+      if (!(await isSlugUnique(db, slug, directory))) {
+        console.log(`Skipping existing: ${slug} (${directory})`);
+        continue;
+      }
+
       await db.insert(blogPosts).values({
         title: frontmatter.title,
         description: frontmatter.description,
         slug,
+        type: directory,
         createdAt: parseDate(frontmatter.date),
       });
 
-      console.log(`Processed: ${slug}`);
+      console.log(`Inserted: ${slug} (${directory})`);
     } catch (error) {
       console.error(`Error processing ${relativePath}:`, error);
     }
