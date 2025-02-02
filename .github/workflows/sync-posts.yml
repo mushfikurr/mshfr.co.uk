@@ -25,13 +25,16 @@ jobs:
         with:
           node-version: '16'
 
+      - name: Install latest ts-node
+        run: npm install -g ts-node@latest
+
       - name: Debug - List files
         run: ls -R src/scripts
 
       - name: Install dependencies
         run: |
           npm install
-
+      
       - name: Run sync script
-        run: npx ts-node --transpile-only --loader ts-node/esm src/scripts/syncPosts.ts
+        run: node --loader ts-node/esm src/scripts/syncPosts.ts
 
