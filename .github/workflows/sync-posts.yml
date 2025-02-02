@@ -25,6 +25,9 @@ jobs:
         with:
           node-version: '16'
 
+      - name: Debug - List files
+        run: ls -R src/scripts
+
       - name: Install dependencies
         run: |
           npm install
