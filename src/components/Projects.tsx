@@ -1,11 +1,11 @@
 "use client";
 
 import { blogPosts } from "@/lib/db/schema";
-import { AppWindow, ArrowRight, ChevronRight } from "lucide-react";
+import { AppWindow } from "lucide-react";
+import Link from "next/link";
 import { cn } from "../utils/utils";
 import Card from "./ui/Card";
 import { EmojiCallout } from "./ui/EmojiCallout";
-import Link from "next/link";
 import { CustomLink } from "./ui/Link";
 
 type BlogPost = typeof blogPosts.$inferSelect;
