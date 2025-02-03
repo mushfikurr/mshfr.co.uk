@@ -4,45 +4,33 @@ import {
   LandingHeading,
   LandingIntroduction,
 } from "@/components/LandingSection";
-import { Projects } from "@/components/Projects";
 import { EmojiCallout } from "@/components/ui/EmojiCallout";
-import { IconAnchor } from "@/components/ui/IconButton";
+import { CustomLink } from "@/components/ui/Link";
 import { PageContainer } from "@/components/ui/PageContainer";
-import { QUERIES } from "@/lib/db/queries";
-import { cn } from "@/utils/utils";
-import { ChevronDown } from "lucide-react";
 
 export default async function Home() {
-  const projects = await QUERIES.getPostsByType("projects");
-
   return (
     <div>
       <PageContainer className="-mt-[5.6rem]" id="Home">
-        <div className="max-w-screen-sm w-full py-24 pb-8 max-sm:pt-10">
+        <div className="max-w-screen-sm w-full py-16 pb-8 max-sm:pt-10">
           <LandingHeading />
         </div>
 
         <div className="flex flex-col gap-8 w-full max-w-screen-sm grow">
-          <div className="flex gap-4 grow">
+          <div className="flex gap-4">
             <LandingIntroduction />
           </div>
-          <div className="flex items-center justify-center w-full">
-            <IconAnchor
-              Icon={ChevronDown}
-              iconClassnames="h-4 w-4"
-              href="#Projects"
-              className={cn(
-                "hover:scale-110 hover:bg-primary/30 active:bg-secondary/80 shadow-md",
-                "bg-gradient-to-br from-secondary/20 to-background/0 backdrop-blur-md border border-text-100/5"
-              )}
-            />
+          <div className="flex flex-col justify-between animate-slide-in-750 opacity-0">
+            <CustomLink href="/projects" className="text-sm">
+              My projects
+            </CustomLink>
+            <CustomLink href="/blog" className="text-sm">
+              Blog
+            </CustomLink>
+            <CustomLink href="#Contact" className="text-sm">
+              Contact
+            </CustomLink>
           </div>
-        </div>
-      </PageContainer>
-
-      <PageContainer id="Projects">
-        <div className="max-w-prose w-full h-full flex flex-col gap-8">
-          <Projects posts={projects} />
         </div>
       </PageContainer>
 
@@ -50,8 +38,8 @@ export default async function Home() {
         <div className="max-w-prose w-full h-full flex flex-col gap-8">
           <div className="flex flex-col gap-8">
             <div className="space-y-6">
-              <div className="space-y-3">
-                <h1 className="text-3xl font-semibold pt-8 text-text-100 tracking-tight">
+              <div className="space-y-4">
+                <h1 className="text-xl font-semibold pt-8 text-text-100 tracking-tight">
                   Contact
                 </h1>
                 <EmojiCallout

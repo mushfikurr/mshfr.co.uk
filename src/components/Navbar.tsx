@@ -1,7 +1,9 @@
 "use client";
 
 import { Cog } from "lucide-react";
+import Link from "next/link";
 import { useSelectedLayoutSegments } from "next/navigation";
+import { useEffect, useState } from "react";
 import { cn } from "../utils/utils";
 import Time from "./ui/Time";
 
@@ -13,19 +15,31 @@ const pages = [
 
 export function Navbar() {
   const segments = useSelectedLayoutSegments();
+  const [hash, setHash] = useState<string>("");
+
+  useEffect(() => {
+    // Set hash from the URL when it changes
+    const handleHashChange = () => setHash(window.location.hash);
+    window.addEventListener("hashchange", handleHashChange);
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
 
   const isItemActive = (href: string) => {
-    // Normalize the href by removing leading and trailing slashes
     const normalizedHref = href.replace(/^\/+|\/+$/g, "");
 
-    // Handle the case for the root path "/"
+    // Handle hash-based routes separately
+    if (href.startsWith("#")) {
+      return hash === href;
+    }
+
     if (normalizedHref === "") {
-      // For the root path, check if segments are empty (root of the site)
       return segments.length === 0;
     }
 
-    // For other paths, check if the first segment matches
-    // Make sure to join the segments and check if it starts with the href
     return segments.join("/").startsWith(normalizedHref);
   };
 
@@ -100,7 +114,7 @@ function NavbarItem({
       )}
       {...props}
     >
-      <a href={href}>{children}</a>
+      <Link href={href}>{children}</Link>
     </li>
   );
 }

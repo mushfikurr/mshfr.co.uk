@@ -23,6 +23,7 @@ export default {
         "slide-in-150": "slide-in 1s ease 150ms forwards",
         "slide-in-300": "slide-in 1s ease 300ms forwards",
         "slide-in-500": "slide-in 1s ease 500ms forwards",
+        "slide-in-750": "slide-in 1s ease 750ms forwards",
       },
       keyframes: {
         background: {

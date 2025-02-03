@@ -5,10 +5,15 @@ import { blogPosts } from "../src/lib/db/schema";
 import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 const CONTENT_DIR = path.join(process.cwd(), "src/app/content");
 const ALLOWED_DIRECTORIES = ["projects", "blog"];
+
+const SLUG_MAPPING = {
+  projects: "blog",
+  blog: "blog",
+} as const;
 
 interface Frontmatter {
   title: string;
@@ -33,11 +38,11 @@ function parseDate(dateString: string): bigint {
   return BigInt(Math.floor(date.getTime() / 1000));
 }
 
-async function isSlugUnique(db: any, slug: string, type: "blog" | "projects") {
+async function isSlugUnique(db: any, slug: string) {
   const existing = await db
     .select()
     .from(blogPosts)
-    .where(and(eq(blogPosts.slug, slug), eq(blogPosts.type, type)))
+    .where(eq(blogPosts.slug, slug))
     .limit(1);
 
   return existing.length === 0;
@@ -47,7 +52,7 @@ async function main() {
   const connection = await createConnection({
     host: process.env.SINGLESTORE_HOST,
     user: process.env.SINGLESTORE_USER,
-    password: process.env.SINGLESTORE_PASSWORD,
+    password: process.env.SINGLESTORE_PASS,
     port: Number(process.env.SINGLESTORE_PORT),
     database: process.env.SINGLESTORE_DATABASE,
     ssl: {
@@ -58,7 +63,9 @@ async function main() {
 
   for await (const filePath of walk(CONTENT_DIR)) {
     const relativePath = path.relative(CONTENT_DIR, filePath);
-    const directory = relativePath.split(path.sep)[0] as "blog" | "projects";
+    const directory = relativePath.split(
+      path.sep
+    )[0] as keyof typeof SLUG_MAPPING;
 
     if (!ALLOWED_DIRECTORIES.includes(directory)) continue;
 
@@ -67,13 +74,13 @@ async function main() {
       const { data } = matter(fileContent);
       const frontmatter = data as Frontmatter;
 
-      const slug = relativePath
-        .replace(/\.mdx$/, "")
-        .split(path.sep)
-        .join("/");
+      const relativePathWithoutExt = relativePath.replace(/\.mdx$/, "");
+      const parts = relativePathWithoutExt.split(path.sep);
+      parts[0] = SLUG_MAPPING[directory];
+      const slug = parts.join("/");
 
-      if (!(await isSlugUnique(db, slug, directory))) {
-        console.log(`Skipping existing: ${slug} (${directory})`);
+      if (!(await isSlugUnique(db, slug))) {
+        console.log(`Skipping existing: ${slug}`);
         continue;
       }
 

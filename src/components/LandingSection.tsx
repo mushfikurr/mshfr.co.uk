@@ -1,7 +1,7 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 import { cn } from "../utils/utils";
 import { IconLink } from "./ui/IconLink";
-import { Link } from "./ui/Link";
+import { TextLink } from "./ui/TextLink";
 
 export const LandingHeading: React.FC = () => {
   return (
@@ -13,8 +13,8 @@ export const LandingHeading: React.FC = () => {
           {"Hi, I'm Mushfikur."}
         </h1>
         <h1 className="text-lg max-w-prose text-text-100">
-          A full-stack, London based developer passionate about crafting refined
-          software.
+          A full-stack, London based developer. Advocate of great design and
+          experiences.
         </h1>
       </div>
 
@@ -29,26 +29,26 @@ export const LandingIntroduction: React.FC = () => {
       <div className="space-y-6 text-text-300">
         <p>
           <span className="text-text-100">
-            I am passionate about creating software that feels both organic and
-            purposeful.
+            I enjoy TypeScript, React, and Next.js.
           </span>{" "}
-          My journey started and is fueled by curiosity, and a continuous
-          dedication to improvement.
+          I enjoy everything web whilst also exploring other areas. Desktop
+          applications, audio programming, basically anything that helps me
+          solve the problems I face.
         </p>
         <p>
           <span className="text-text-100">
             I have worked on projects such as{" "}
-            <Link href="https://github.com/mushfikurr/booking-app">Bookal</Link>
-            ,{" "}
-            <Link href="https://github.com/mushfikurr/videocollab">
+            <TextLink href="https://velvara.co.uk">Velvara</TextLink>,{" "}
+            <TextLink href="https://github.com/mushfikurr/videocollab">
               VideoCollab
-            </Link>
+            </TextLink>
             , and{" "}
-            <Link href="https://github.com/mushfikurr/yt-sample-gen">
+            <TextLink href="https://github.com/mushfikurr/yt-sample-gen">
               yt-sample-gen
-            </Link>
+            </TextLink>
           </span>
-          . I have written more about them below.
+          . I spend a lot of time{" "}
+          <TextLink href="/blog">writing about them</TextLink>.
         </p>
       </div>
 

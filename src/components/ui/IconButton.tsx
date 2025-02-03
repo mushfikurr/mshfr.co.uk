@@ -1,5 +1,6 @@
 import { LucideIcon } from "lucide-react";
 import { cn } from "../../utils/utils";
+import Link from "next/link";
 
 interface IconButtonProps extends React.ComponentPropsWithoutRef<"button"> {
   Icon: LucideIcon;
@@ -34,6 +35,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
 
 interface IconAnchorProps extends React.ComponentPropsWithoutRef<"a"> {
   Icon: LucideIcon;
+  href: string;
   iconClassnames?: string;
 }
 
@@ -41,24 +43,27 @@ export const IconAnchor: React.FC<IconAnchorProps> = ({
   className,
   Icon,
   iconClassnames,
+  href,
   ...props
 }: IconAnchorProps) => {
   return (
-    <a
+    <Link
       className={cn(
-        "group cursor-pointer p-2 rounded-full",
+        "group cursor-pointer rounded-full flex items-center gap-2 text-xs py-2 pl-3",
         className,
         "transition-all duration-300 ease-in-out"
       )}
+      href={href}
       {...props}
     >
       <Icon
         className={cn(
-          "text-text-100 group-hover:text-primary-500 group-active:text-primary-400",
+          "text-text-400 group-hover:text-text-200 group-active:text-text-100 transition-colors ease-in-out duration-300",
           iconClassnames
         )}
-        strokeWidth={1.5}
+        strokeWidth={3.5}
       />
-    </a>
+      <div className="pr-3 font-medium">{props.children}</div>
+    </Link>
   );
 };

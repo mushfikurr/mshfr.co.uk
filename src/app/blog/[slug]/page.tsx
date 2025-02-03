@@ -1,6 +1,6 @@
 import MDXContent from "@/components/MDXContent";
+import { getMdxData } from "@/lib/getMdxData";
 import { notFound } from "next/navigation";
-import { getBlogData } from "@/lib/getBlogMetadata";
 
 export interface FrontmatterMetadata {
   title: string;
@@ -14,9 +14,16 @@ export const generateMetadata = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const slug = (await params).slug;
-  const { metadata } = await getBlogData(slug);
+  const contentData = await getMdxData(slug);
 
-  return metadata;
+  if (contentData) {
+    return contentData.metadata;
+  }
+
+  return {
+    title: "Default Title",
+    description: "Default description here",
+  };
 };
 
 export default async function ProjectPage({
@@ -25,11 +32,13 @@ export default async function ProjectPage({
   params: Promise<{ slug: string }>;
 }) {
   const slug = (await params).slug;
-  const { mdxSource } = await getBlogData(slug);
+  const contentData = await getMdxData(slug);
 
-  if (!slug || !mdxSource?.compiledSource) {
+  if (!slug || !contentData?.mdxSource) {
     return notFound();
   }
+
+  const { mdxSource } = contentData;
 
   return <MDXContent mdxSource={mdxSource} />;
 }

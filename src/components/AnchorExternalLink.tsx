@@ -1,5 +1,5 @@
 import { LucideIcon, Link as LinkIcon } from "lucide-react";
-import { Link } from "./ui/Link";
+import { TextLink } from "./ui/TextLink";
 
 interface AnchorExternalLinkProps extends React.ComponentPropsWithoutRef<"a"> {
   Icon?: LucideIcon;
@@ -12,11 +12,11 @@ export function AnchorExternalLink({
   ...props
 }: AnchorExternalLinkProps) {
   return (
-    <Link href={href} target="_blank" {...props}>
+    <TextLink href={href} target="_blank" {...props}>
       <span className="w-full flex gap-2.5 items-center text-sm">
         {Icon && <Icon className="w-4" />}
         {props.title}
       </span>
-    </Link>
+    </TextLink>
   );
 }
