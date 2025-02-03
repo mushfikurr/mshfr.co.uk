@@ -107,7 +107,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="space-y-1.5">
           <div className="flex items-center justify-between group">
             <h3 className="text-base font-medium">{title}</h3>
-            <AppWindow className="h-4 w-4" />
+            <AppWindow className="hidden sm:block h-4 w-4" />
           </div>
 
           <p
