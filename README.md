@@ -4,6 +4,7 @@ My own corner of the internet. Powered by Next.js, Tailwind, and a lot of markdo
 
 TODO:
 
-- [ ] Add blog posts
+- [ ] Fix GitHub action that doesnt run since moving to pnpm
 - [ ] Add projects
 - [ ] Fix contact form
+- [x] Add blog posts
