@@ -33,7 +33,7 @@ jobs:
         env:
           SINGLESTORE_HOST: ${{ secrets.SINGLESTORE_HOST }}
           SINGLESTORE_USER: ${{ secrets.SINGLESTORE_USER }}
-          SINGLESTORE_PASSWORD: ${{ secrets.SINGLESTORE_PASSWORD }}
+          SINGLESTORE_PASS: ${{ secrets.SINGLESTORE_PASSWORD }}
           SINGLESTORE_PORT: ${{ secrets.SINGLESTORE_PORT }}
           SINGLESTORE_DATABASE: ${{ secrets.SINGLESTORE_DATABASE }}
         run: npm run script:sync
