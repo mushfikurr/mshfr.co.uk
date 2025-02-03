@@ -1,19 +1,43 @@
-import { cn } from "../../utils/utils";
+import { cn, isExternalLink } from "../../utils/utils";
+import Link from "next/link";
 
 export const TextLink: React.FC<React.ComponentPropsWithoutRef<"a">> = ({
   className,
+  href,
+  target,
+  rel,
+  children,
   ...props
-}: React.ComponentPropsWithoutRef<"a">) => {
+}) => {
+  const external = isExternalLink(href);
+
+  const linkClassName = cn(
+    "group cursor-pointer underline decoration-1 underline-offset-1 text-text-200 hover:text-text-100 transition duration-300 ease-in-out",
+    className
+  );
+
+  if (external) {
+    return (
+      <a
+        href={href ?? ""}
+        className={linkClassName}
+        target={target ?? "_blank"}
+        rel={rel ? `${rel} noopener noreferrer` : "noopener noreferrer"}
+        {...props}
+      >
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <a
-      className={cn(
-        "group cursor-pointer underline decoration-1 underline-offset-1 text-text-200 hover:text-text-100 transition duration-300 ease-in-out",
-        className
-      )}
-      target={props.target ?? "_blank"}
+    <Link
+      href={href ?? ""}
+      className={linkClassName}
+      target={target}
       {...props}
     >
-      {props.children}
-    </a>
+      {children}
+    </Link>
   );
 };

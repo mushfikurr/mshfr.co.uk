@@ -1,4 +1,4 @@
-import { cn } from "@/utils/utils";
+import { cn, isExternalLink } from "@/utils/utils";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
@@ -6,9 +6,10 @@ export const CustomLink = ({
   children,
   className,
   href,
+  rel,
   ...props
 }: React.ComponentPropsWithoutRef<"a"> & { href: string }) => {
-  const isExternal = href.startsWith("http");
+  const isExternal = isExternalLink(href);
 
   const LinkComponent = isExternal ? "a" : Link;
 
@@ -19,7 +20,8 @@ export const CustomLink = ({
         "font-medium text-sm text-text-300 hover:text-text-200 active:text-text-100 transition-colors duration-300 ease-in-out flex gap-1.5 items-center group py-1 md:py-0.5",
         className
       )}
-      {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      target={isExternal ? "_blank" : "_self"}
+      rel={rel ? `${rel} noopener noreferrer` : "noopener noreferrer"}
       {...props}
     >
       <ChevronRight
