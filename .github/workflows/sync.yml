@@ -24,13 +24,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: "pnpm"
+          cache-dependency-path: "pnpm-lock.yaml"
 
-      - uses: pnpm/action-setup@v3
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
         with:
           version: 8
-          run_install: false
-          standalone: true
-          dest: ~/setup-pnpm
+          run_install: |
+            --frozen-lockfile
+            --strict-peer-dependencies
 
       - name: Install dependencies
         run: pnpm install
