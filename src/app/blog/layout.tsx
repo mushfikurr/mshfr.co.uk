@@ -8,7 +8,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
         "max-w-prose w-full h-full mx-auto text-text-100 py-12 px-8 pb-24 gap-8 min-h-screen"
       )}
     >
-      <Breadcrumb parent="projects" />
+      <Breadcrumb parent="blog" />
       {children}
     </div>
   );
