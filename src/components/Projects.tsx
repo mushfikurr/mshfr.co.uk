@@ -1,6 +1,5 @@
 "use client";
 
-import { blogPosts } from "@/lib/db/schema";
 import { AppWindow } from "lucide-react";
 import Link from "next/link";
 import { cn } from "../utils/utils";
@@ -8,12 +7,7 @@ import Card from "./ui/Card";
 import { EmojiCallout } from "./ui/EmojiCallout";
 import { CustomLink } from "./ui/Link";
 
-type BlogPost = typeof blogPosts.$inferSelect;
-interface ProjectsProps {
-  posts: BlogPost[];
-}
-
-export const Projects: React.FC<ProjectsProps> = ({ posts }: ProjectsProps) => {
+export const Projects: React.FC = () => {
   return (
     <div className="flex flex-col h-full gap-y-10 overflow-y-auto">
       <div className="space-y-4">
