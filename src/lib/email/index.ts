@@ -1,17 +1,28 @@
 "use server";
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
+import SMTPTransport from "nodemailer/lib/smtp-transport";
 
-const transporter = nodemailer.createTransport({
+const transportOptions: SMTPTransport.Options = {
   host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
+  port: Number(process.env.SMTP_PORT),
   secure: true,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
-});
+};
 
-export async function sendMailAction(prevState: any, formData: FormData) {
+const transporter = nodemailer.createTransport(transportOptions);
+
+export type StatusType = {
+  status: string;
+  message: string;
+};
+
+export async function sendMailAction(
+  prevState: StatusType,
+  formData: FormData
+) {
   const name = formData.get("name");
   const email = formData.get("email");
   const message = formData.get("message");

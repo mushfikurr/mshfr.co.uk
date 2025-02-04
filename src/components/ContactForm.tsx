@@ -1,13 +1,13 @@
 "use client";
 
-import { sendMailAction } from "@/lib/email";
+import { StatusType, sendMailAction } from "@/lib/email";
 import { MailCheck, MailWarning } from "lucide-react";
 import { useActionState } from "react";
 import { cn } from "../utils/utils";
 import { cardClassnames } from "./ui/Card";
 import { PrimaryButton } from "./ui/PrimaryButton";
 
-const initialState = {
+const initialState: StatusType = {
   status: "",
   message: "",
 };
