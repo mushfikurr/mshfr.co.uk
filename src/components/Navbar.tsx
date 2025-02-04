@@ -8,9 +8,10 @@ import { cn } from "../utils/utils";
 import Time from "./ui/Time";
 
 const pages = [
-  { name: "Home", href: "/" },
+  { name: "Me", href: "/" },
   { name: "Projects", href: "/projects" },
   { name: "Blog", href: "/blog" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export function Navbar() {

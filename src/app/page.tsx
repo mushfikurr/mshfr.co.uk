@@ -1,10 +1,7 @@
-import { ContactForm } from "@/components/ContactForm";
 import {
-  ContactLinks,
   LandingHeading,
   LandingIntroduction,
 } from "@/components/LandingSection";
-import { EmojiCallout } from "@/components/ui/EmojiCallout";
 import { CustomLink } from "@/components/ui/Link";
 import { PageContainer } from "@/components/ui/PageContainer";
 
@@ -30,31 +27,6 @@ export default async function Home() {
             <CustomLink href="#Contact" className="text-sm">
               Contact
             </CustomLink>
-          </div>
-        </div>
-      </PageContainer>
-
-      <PageContainer id="Contact">
-        <div className="max-w-prose w-full h-full flex flex-col gap-8">
-          <div className="flex flex-col gap-8">
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <h1 className="text-xl font-semibold pt-8 text-text-100 tracking-tight">
-                  Contact
-                </h1>
-                <EmojiCallout
-                  emoji={"👋"}
-                  heading="I'm currently looking for work."
-                >
-                  If you are interested, or just want to say hello, fill out the
-                  form below, or connect with me using one of the links.
-                </EmojiCallout>
-              </div>
-
-              <ContactLinks className="justify-start" />
-            </div>
-
-            <ContactForm />
           </div>
         </div>
       </PageContainer>
