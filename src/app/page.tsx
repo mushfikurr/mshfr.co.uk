@@ -24,7 +24,7 @@ export default async function Home() {
             <CustomLink href="/blog" className="text-sm">
               Blog
             </CustomLink>
-            <CustomLink href="#Contact" className="text-sm">
+            <CustomLink href="/contact" className="text-sm">
               Contact
             </CustomLink>
           </div>
