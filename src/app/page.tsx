@@ -8,7 +8,7 @@ import { PageContainer } from "@/components/ui/PageContainer";
 export default async function Home() {
   return (
     <div>
-      <PageContainer className="-mt-[5.6rem]" id="Home">
+      <PageContainer className="-mt-[5.6rem] pb-24" id="Home">
         <div className="max-w-screen-sm w-full py-16 pb-8 max-sm:pt-10">
           <LandingHeading />
         </div>
