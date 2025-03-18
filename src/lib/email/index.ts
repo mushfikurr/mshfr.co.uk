@@ -29,11 +29,11 @@ export async function sendMailAction(
 
   try {
     const info = await transporter.sendMail({
-      from: `"${name}" <${email}>`,
+      from: process.env.SMTP_USER,
       to: process.env.SMTP_USER,
       subject: "[mshfr.co.uk] Contact form enquiry",
       text: `${message}`,
-      html: `<p>${message}</p>`,
+      html: `<p>From: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p>`,
     });
 
     console.log("Message sent: %s", info.messageId);
