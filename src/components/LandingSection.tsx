@@ -61,11 +61,6 @@ export const LandingIntroduction: React.FC = () => {
           Alongside my journey, I continue to work on my projects, learn new
           concepts, and apply them.
         </p>
-        <p>
-          My current learning is focused on{" "}
-          <span className="text-text-100">DevOps</span> and{" "}
-          <span className="text-text-100">Networking (CCNA)</span>.
-        </p>
       </div>
     </div>
   );
