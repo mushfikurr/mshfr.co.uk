@@ -2,8 +2,13 @@
 title: "How I built Velvara, an e-commerce store for perfume oil"
 description: "The behind the scenes of building a premium perfume oil fragrance store."
 date: "01/02/2025"
-openGraphImage: "/img/velvara-screenshot.png"
+image: "/img/velvara-screenshot.png"
+type: "projects"
 ---
+
+import { HeaderImage } from "@/components/ui/HeaderImage";
+import { CustomLink } from "@/components/ui/Link";
+import { Divider } from "@/components/ui/Divider";
 
 <HeaderImage
   src="/img/velvara-screenshot.png"
@@ -12,7 +17,12 @@ openGraphImage: "/img/velvara-screenshot.png"
 
 # How I built Velvara, an e-commerce store for perfume oil
 
-<CustomLink href="https://velvara.co.uk" className="not-prose">Live Website</CustomLink>
+<CustomLink
+  href="https://velvara.co.uk"
+  className="not-prose py-0 leading-none my-0"
+>
+  <p>Live Website</p>
+</CustomLink>
 
 <Divider />
 

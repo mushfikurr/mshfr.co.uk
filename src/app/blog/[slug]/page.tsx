@@ -1,44 +1,61 @@
-import MDXContent from "@/components/MDXContent";
-import { getMdxData } from "@/lib/getMdxData";
-import { notFound } from "next/navigation";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { Metadata } from "next";
+import { loadMdxWithMeta } from "@/lib/blog/loadMdxWithMeta";
+import { HeaderImage } from "@/components/ui/HeaderImage";
+import { CustomLink } from "@/components/ui/Link";
+import { Divider } from "@/components/ui/Divider";
+import { TextLink } from "@/components/ui/TextLink";
 
-export interface FrontmatterMetadata {
-  title: string;
-  description: string;
-  openGraphImage?: string;
-}
-
-export const generateMetadata = async ({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) => {
-  const slug = (await params).slug;
-  const contentData = await getMdxData(slug);
-
-  if (contentData) {
-    return contentData.metadata;
-  }
-
-  return {
-    title: "Default Title",
-    description: "Default description here",
-  };
+const components = {
+  HeaderImage,
+  CustomLink,
+  Divider,
+  a: (props: React.ComponentProps<typeof TextLink>) => <TextLink {...props} />,
+  p: ({ children, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
+    <p
+      {...props}
+      className="hover:text-text-200 transition-colors ease-in-out duration-700"
+    >
+      {children}
+    </p>
+  ),
 };
 
-export default async function ProjectPage({
+export default async function Page({ params }: { params: { slug: string } }) {
+  const { slug } = await params;
+  const { content } = await loadMdxWithMeta(slug);
+
+  return <MDXRemote source={content} components={components} />;
+}
+
+export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
-}) {
-  const slug = (await params).slug;
-  const contentData = await getMdxData(slug);
+  params: { slug: string };
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const { meta } = await loadMdxWithMeta(slug);
 
-  if (!slug || !contentData?.mdxSource) {
-    return notFound();
-  }
-
-  const { mdxSource } = contentData;
-
-  return <MDXContent mdxSource={mdxSource} />;
+  return {
+    title: meta.title,
+    description: meta.description,
+    openGraph: {
+      title: meta.title,
+      description: meta.description,
+      images: [
+        {
+          url: meta.image || "/default-og.png",
+          width: 1200,
+          height: 630,
+          alt: meta.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: meta.title,
+      description: meta.description,
+      images: [meta.image || "/default-og.png"],
+    },
+  };
 }
