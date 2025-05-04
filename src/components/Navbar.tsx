@@ -61,7 +61,7 @@ export function Navbar() {
   return (
     <ul
       className={cn(
-        "sticky top-0 left-0 z-10 w-full text-text-400 font-medium bg-gradient-to-b from-background to-transparent backdrop-blur-lg pt-12 pb-4 transition-transform duration-300",
+        "sticky top-0 left-0 z-10 w-full text-text-400 font-medium bg-gradient-to-b from-background to-transparent backdrop-blur-lg pt-8 md:pt-12 pb-4 transition-transform duration-300",
         showNavbar ? "translate-y-0" : "-translate-y-full"
       )}
     >
