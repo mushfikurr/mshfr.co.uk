@@ -19,20 +19,18 @@ export default async function ProjectsPage() {
         </p>
       </div>
       <div>
-        {posts.map((p) => {
-          return (
-            <BlogPostLink
-              key={p.slug}
-              title={p.title}
-              description={p.description}
-              href={`/blog/${p.slug}`}
-              type={p.type}
-              date={p.date}
-            >
-              <CustomLink href={`/blog/${p.slug}`}>Read more</CustomLink>
-            </BlogPostLink>
-          );
-        })}
+        {posts.map((p) => (
+          <BlogPostLink
+            key={p.slug}
+            title={p.title}
+            description={p.description}
+            href={`/blog/${p.slug}`}
+            type={p.type}
+            date={p.date}
+          >
+            <CustomLink href={`/blog/${p.slug}`}>Read more</CustomLink>
+          </BlogPostLink>
+        ))}
       </div>
     </div>
   );
@@ -45,6 +43,7 @@ interface BlogPostLinkProps extends React.ComponentPropsWithoutRef<"div"> {
   date: string;
   type: string;
 }
+
 export function BlogPostLink({
   title,
   description,
