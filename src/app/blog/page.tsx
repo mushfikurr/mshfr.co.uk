@@ -5,7 +5,7 @@ import { cn } from "@/utils/utils";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-export default async function ProjectsPage() {
+export default async function BlogPage() {
   const posts = await getBlogPosts();
 
   return (
