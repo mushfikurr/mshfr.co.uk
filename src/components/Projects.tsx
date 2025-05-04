@@ -35,7 +35,7 @@ export const Projects: React.FC = () => {
       <div className="space-y-1.5">
         <div className="w-full flex items-center justify-between gap-3">
           <h1 className="text-text-300 text-sm font-semibold">Past Projects</h1>
-          <Archive className="h-4 w-4 text-text-300 mr-3.5" />
+          <Archive className="h-4 w-4 text-text-300" />
         </div>
       </div>
       <div className="relative">
