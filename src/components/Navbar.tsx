@@ -1,11 +1,9 @@
 "use client";
 
-import { Cog } from "lucide-react";
 import Link from "next/link";
 import { useSelectedLayoutSegments } from "next/navigation";
 import { useEffect, useState } from "react";
 import { cn } from "../utils/utils";
-import Time from "./ui/Time";
 
 const pages = [
   { name: "Me", href: "/" },

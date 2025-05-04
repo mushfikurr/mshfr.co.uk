@@ -12,7 +12,7 @@ export const Projects: React.FC = () => {
           Projects
         </h1>
         <p className="text-text-300">
-          Projects I'm actively working on and maintaining. Made with ✨
+          {"Projects I'm actively working on and maintaining. Made with ✨"}
         </p>
       </div>
       <div className="relative">

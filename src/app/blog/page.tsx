@@ -1,4 +1,3 @@
-import Card from "@/components/ui/Card";
 import Chip from "@/components/ui/Chip";
 import { CustomLink } from "@/components/ui/Link";
 import { getBlogPosts } from "@/lib/blog/getPosts";

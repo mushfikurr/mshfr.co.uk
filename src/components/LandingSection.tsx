@@ -1,7 +1,6 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 import { cn } from "../utils/utils";
 import { IconLink } from "./ui/IconLink";
-import { TextLink } from "./ui/TextLink";
 
 export const LandingHeading: React.FC = () => {
   return (
