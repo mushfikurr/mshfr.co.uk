@@ -44,7 +44,7 @@ interface BlogPostLinkProps extends React.ComponentPropsWithoutRef<"div"> {
   type: string;
 }
 
-export function BlogPostLink({
+function BlogPostLink({
   title,
   description,
   href,
