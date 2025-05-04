@@ -1,41 +1,37 @@
 import Card from "@/components/ui/Card";
-import { EmojiCallout } from "@/components/ui/EmojiCallout";
+import Chip from "@/components/ui/Chip";
 import { CustomLink } from "@/components/ui/Link";
-import { QUERIES } from "@/lib/db/queries";
-import { blogPosts } from "@/lib/db/schema";
+import { getBlogPosts } from "@/lib/blog/getPosts";
 import { cn } from "@/utils/utils";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-type BlogPost = typeof blogPosts.$inferSelect;
-
 export default async function ProjectsPage() {
-  const posts: BlogPost[] = await QUERIES.getAllPosts();
+  const posts = await getBlogPosts();
 
   return (
-    <div className="flex flex-col gap-y-10">
-      <div className="space-y-4">
-        <h1 className="text-lg font-medium">Blog</h1>
-        <EmojiCallout
-          emoji={"🖊️"}
-          heading="Writing is the key to understanding."
-        >
-          Recently, I&apos;ve had the urge to write down my thoughts and ideas.
-          Below are some of the things I&apos;ve written about.
-        </EmojiCallout>
+    <div className="flex flex-col gap-y-6 w-full">
+      <div className="space-y-1.5">
+        <h1 className="text-lg font-semibold tracking-tight drop-shadow-glow">
+          Blog
+        </h1>
+        <p className="text-text-300">
+          Recent writings, mostly about the things I build.
+        </p>
       </div>
-      <div className="flex flex-col h-full gap-6">
+      <div>
         {posts.map((p) => {
           return (
-            <BlogCard
+            <BlogPostLink
               key={p.slug}
               title={p.title}
               description={p.description}
+              href={`/blog/${p.slug}`}
               type={p.type}
-              date={p.createdAt}
-              href={p.slug}
+              date={p.date}
             >
-              <CustomLink href={p.slug}>Read more</CustomLink>
-            </BlogCard>
+              <CustomLink href={`/blog/${p.slug}`}>Read more</CustomLink>
+            </BlogPostLink>
           );
         })}
       </div>
@@ -43,56 +39,47 @@ export default async function ProjectsPage() {
   );
 }
 
-interface BlogCardProps extends React.ComponentPropsWithoutRef<"div"> {
+interface BlogPostLinkProps extends React.ComponentPropsWithoutRef<"div"> {
   title: string;
   description: string;
   href: string;
+  date: string;
   type: string;
-  date: bigint;
 }
-
-const BlogCard: React.FC<BlogCardProps> = ({
+export function BlogPostLink({
   title,
   description,
   href,
-  type,
   date,
-  ...props
-}: BlogCardProps) => {
-  function formatDate(timestamp: bigint): Date {
-    const milliseconds = Number(timestamp) * 1000; // Convert seconds to milliseconds
-    return new Date(milliseconds);
-  }
-
+  type,
+}: BlogPostLinkProps) {
   return (
-    <Card
+    <Link
+      href={href}
       className={cn(
-        "flex flex-col gap-3 justify-between grow overflow-y-auto shadow-md py-6 px-5",
-        "hover:bg-secondary/25 active:bg-secondary/30",
+        "bg-none flex flex-col items-start w-full py-4 px-4 -ml-[15px] text-sm space-y-1 group",
+        "border-text-50/10 border-t-0 border-x-0 border-b rounded-b-none",
+        "hover:bg-secondary/30",
+        "first:rounded-t-md",
+        "last:border-none last:rounded-b-md",
         "transition-colors ease-in-out duration-300"
       )}
     >
-      <div className="flex flex-wrap justify-between items-center">
-        <p className="w-fit text-text-400 text-xs font-medium">#{type}</p>
-        <p className="text-xs text-text-400 font-medium">
-          {formatDate(date).toLocaleString().split(",")[0]}
-        </p>
+      <div className="mb-0.5 space-y-0.5">
+        <h1 className="font-medium leading-[1.1] inline-flex items-center justify-between gap-2">
+          {title}
+          <ArrowRight
+            className="h-3 w-3 mt-0.5 text-text-300 group-hover:text-text-200 transition-all -translate-x-1 group-hover:translate-x-1 duration-300 ease-in-out opacity-0 group-hover:opacity-100"
+            strokeWidth={3}
+          />
+        </h1>
+        <p className="text-text-300">{description} </p>
       </div>
-      <Link
-        href={href}
-        className="absolute inset-0"
-        aria-label={`Go to ${title}`}
-      />
-      <div className="space-y-3 relative z-10">
-        <div className="flex items-center justify-between group">
-          <h3 className="text-base font-medium">{title}</h3>
-        </div>
 
-        <p className="text-text-300 line-clamp-2 text-sm max-sm:line-clamp-none">
-          {description}
-        </p>
-        <div className="flex flex-col">{props.children}</div>
+      <div className="flex gap-3 justify-between items-center text-xs w-full text-text-300">
+        <p>{date}</p>
+        <Chip className="">#{type}</Chip>
       </div>
-    </Card>
+    </Link>
   );
-};
+}

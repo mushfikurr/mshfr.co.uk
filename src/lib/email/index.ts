@@ -1,4 +1,5 @@
 "use server";
+
 import nodemailer from "nodemailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 
@@ -26,29 +27,71 @@ export async function sendMailAction(
   const name = formData.get("name");
   const email = formData.get("email");
   const message = formData.get("message");
+  const captchaToken = formData.get("cf-turnstile-response");
 
+  if (!captchaToken) {
+    return {
+      status: "error",
+      message: "Captcha verification failed. Please try again.",
+    };
+  }
+
+  try {
+    const verifyRes = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          secret: process.env.TURNSTILE_KEY!,
+          response: captchaToken.toString(),
+        }),
+      }
+    );
+
+    const verifyJson = await verifyRes.json();
+
+    if (!verifyJson.success) {
+      return {
+        status: "error",
+        message:
+          "Captcha verification failed. Please try again or refresh the page.",
+      };
+    }
+  } catch (err) {
+    console.error("Turnstile verification error:", err);
+    return {
+      status: "error",
+      message:
+        "Error verifying captcha. Please refresh the page and try again.",
+    };
+  }
+
+  // Send mail
   try {
     const info = await transporter.sendMail({
       from: process.env.SMTP_USER,
       to: process.env.SMTP_USER,
       subject: "[mshfr.co.uk] Contact form enquiry",
       text: `${message}`,
-      html: `<p>From: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p>`,
+      html: `<p><strong>From:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong><br>${message}</p>`,
     });
 
     console.log("Message sent: %s", info.messageId);
-    console.log(prevState);
+
     return {
       status: "success",
       message:
         "Thanks for reaching out! I'll get back to you as soon as possible.",
     };
   } catch (error) {
-    console.log(error);
+    console.error("Mailer error:", error);
     return {
       status: "error",
       message:
-        "Error submitting form. Please try emailing me directly at mushfikur0@gmail.com",
+        "Error submitting form. Please try emailing me directly at mushfikur0@gmail.com.",
     };
   }
 }

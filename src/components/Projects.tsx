@@ -1,56 +1,59 @@
 "use client";
 
-import { AppWindow } from "lucide-react";
+import { Archive, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { cn } from "../utils/utils";
-import Card from "./ui/Card";
-import { EmojiCallout } from "./ui/EmojiCallout";
-import { CustomLink } from "./ui/Link";
 
 export const Projects: React.FC = () => {
   return (
-    <div className="flex flex-col h-full gap-y-10 overflow-y-auto">
-      <div className="space-y-4">
-        <h1 className="text-lg font-medium">Projects</h1>
-        <EmojiCallout emoji={"📌"} heading="I'm a project driven person.">
-          Below are products I have worked on meticulously that have allowed me
-          to solidify my skills, and each solve a problem that I have
-          encountered.
-        </EmojiCallout>
+    <div className="flex flex-col h-full gap-y-6 grow w-full max-w-prose">
+      <div className="space-y-1.5">
+        <h1 className="text-lg font-semibold tracking-tight drop-shadow-glow">
+          Projects
+        </h1>
+        <p className="text-text-300">
+          Projects I'm actively working on and maintaining. Made with ✨
+        </p>
       </div>
-      <div className="flex flex-col h-full gap-6 grow">
+      <div className="relative">
         <ProjectCard
-          title={"velvara.co.uk"}
-          description={
-            "An e-commerce store for luxury perfume oils, built with Typescript, Next.js and Tailwind."
-          }
-          href={"https://velvara.co.uk"}
-        >
-          <CustomLink href={"https://velvara.co.uk"}>Live Website</CustomLink>
-          <CustomLink href={"blog/velvaras-journey"}>Blog Post</CustomLink>
-        </ProjectCard>
+          title="Velvara"
+          description="A self-hosted, headless e-commerce platform for premium perfume oils, built with Medusa.js, Next.js, and Stripe."
+          href="https://velvara.co.uk"
+        />
         <ProjectCard
-          title={"VideoCollab"}
-          description={
-            "A multiplayer video collaboration app built with Electron, React, and Tailwind."
-          }
-          href={"https://github.com/mushfikurr/videocollab"}
-        >
-          <CustomLink href={"https://github.com/mushfikurr/videocollab"}>
-            GitHub
-          </CustomLink>
-        </ProjectCard>
+          title="Focality"
+          description="Multiplayer focus platform for everyone, built with Next.js and Convex."
+          href="https://focality.netlify.app"
+        />
         <ProjectCard
-          title={"yt-sample-gen"}
-          description={
-            "An audio sampler that generates samples from YouTube videos. Built with Python, Flask, and React. Uses Celery to offload processing."
-          }
-          href={"https://github.com/mushfikurr/yt-sample-gen"}
-        >
-          <CustomLink href={"https://github.com/mushfikurr/yt-sample-gen"}>
-            GitHub
-          </CustomLink>
-        </ProjectCard>
+          title="Overline"
+          description="Brings a Linux style topbar to Windows, built with Zebar and React."
+          href="https://github.com/mushfikurr/overline-zebar"
+        />
+      </div>
+      <div className="space-y-1.5">
+        <div className="w-full flex items-center justify-between gap-3">
+          <h1 className="text-text-300 text-sm font-semibold">Past Projects</h1>
+          <Archive className="h-4 w-4 text-text-300 mr-3.5" />
+        </div>
+      </div>
+      <div className="relative">
+        <ProjectCard
+          title="enzyme-convert"
+          description="Fully local media conversion tool for browsers, built with React and Ffmpeg.wasm."
+          href="https://enzyme.mshfr.co.uk"
+        />
+        <ProjectCard
+          title="yt-sample-gen"
+          description="Sample generator for musicians, using YouTube, built with React and Python."
+          href="https://github.com/mushfikurr/yt-sample-gen"
+        />
+        <ProjectCard
+          title="videocollab"
+          description="Multiplayer video editor platform, built with React and Electron."
+          href="https://github.com/mushfikurr/videocollab"
+        />
       </div>
     </div>
   );
@@ -61,37 +64,31 @@ interface ProjectCardProps extends React.ComponentPropsWithoutRef<"div"> {
   description: string;
   href: string;
 }
-
-const ProjectCard: React.FC<ProjectCardProps> = ({
+export default function ProjectCard({
   title,
   description,
   href,
-  ...props
-}: ProjectCardProps) => {
+}: ProjectCardProps) {
   return (
-    <Card
+    <Link
+      href={href}
       className={cn(
-        "flex flex-col gap-3 justify-between grow overflow-y-auto shadow-md py-6 px-5",
-        "hover:bg-secondary/25 active:bg-secondary/30",
+        "bg-none flex flex-col items-start gap-0.5 w-full py-4 px-4 -ml-[15px] text-sm space-y-1 group",
+        "border-text-50/10 border-t-0 border-x-0 border-b rounded-b-none",
+        "hover:bg-secondary/30",
+        "first:rounded-t-md",
+        "last:border-none last:rounded-b-md",
         "transition-colors ease-in-out duration-300"
       )}
     >
-      <Link
-        href={href}
-        className="absolute inset-0"
-        aria-label={`Go to ${title}`}
-      />
-      <div className="space-y-3 relative z-10">
-        <div className="flex items-center justify-between group">
-          <h3 className="text-base font-medium">{title}</h3>
-          <AppWindow className="hidden sm:block h-4 w-4" />
-        </div>
-
-        <p className="text-text-300 line-clamp-2 text-sm max-sm:line-clamp-none">
-          {description}
-        </p>
-        <div className="flex flex-col">{props.children}</div>
-      </div>
-    </Card>
+      <h1 className="font-medium leading-[1.1] inline-flex items-center justify-between gap-2">
+        {title}{" "}
+        <ArrowRight
+          className="h-3 w-3 text-text-300 group-hover:text-text-200 transition-all -translate-x-1 group-hover:translate-x-1 duration-300 ease-in-out opacity-0 group-hover:opacity-100"
+          strokeWidth={3}
+        />
+      </h1>
+      <p className="text-text-300">{description} </p>
+    </Link>
   );
-};
+}

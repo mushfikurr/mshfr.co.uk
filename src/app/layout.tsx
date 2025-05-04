@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
+import { PageContainer } from "@/components/ui/PageContainer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -14,6 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://mshfr.co.uk/"
+  ),
   title: "mshfr.co.uk",
   description: "My corner of the internet.",
 };
@@ -26,10 +30,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${geistMono.variable} antialiased bg-background bg-gradient-to-br from-background/15 via-secondary/15 to-background/15 animate-background bg-cover bg-fixed transform-gpu`}
+        className={`${inter.variable} ${geistMono.variable} antialiased bg-background bg-gradient-to-br from-background/15 via-secondary/15 to-background/15 animate-background bg-cover bg-fixed transform-gpu flex flex-col min-h-dvh`}
       >
         <Navbar />
-        {children}
+        <PageContainer className="flex flex-col grow">{children}</PageContainer>
       </body>
     </html>
   );
