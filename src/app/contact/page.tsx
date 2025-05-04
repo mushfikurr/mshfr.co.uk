@@ -3,7 +3,7 @@ import { ContactLinks } from "@/components/LandingSection";
 
 export default function Contact() {
   return (
-    <div className="flex flex-col gap-y-6 w-full">
+    <div className="flex flex-col gap-y-6">
       <div className="space-y-6">
         <div className="space-y-1.5">
           <h1 className="text-lg font-semibold tracking-tight drop-shadow-glow">

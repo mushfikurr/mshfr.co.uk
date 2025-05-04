@@ -6,7 +6,7 @@ import { CustomLink } from "@/components/ui/Link";
 
 export default async function Home() {
   return (
-    <div className="max-w-prose mx-auto w-full">
+    <div className="w-full">
       <div className="w-full pb-12">
         <LandingHeading />
       </div>

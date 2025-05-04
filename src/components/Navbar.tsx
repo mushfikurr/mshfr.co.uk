@@ -65,7 +65,7 @@ export function Navbar() {
         showNavbar ? "translate-y-0" : "-translate-y-full"
       )}
     >
-      <div className="flex items-center justify-between relative w-full max-w-prose mx-auto px-1.5">
+      <div className="flex items-center justify-between relative w-full max-w-prose mx-auto px-8 md:px-10">
         <Link
           href="/"
           className="tracking-tighter bg-gradient-to-tl from-accent text-lg to-primary bg-clip-text text-transparent font-semibold leading-[1.1]"

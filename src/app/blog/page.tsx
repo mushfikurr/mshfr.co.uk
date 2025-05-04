@@ -9,7 +9,7 @@ export default async function BlogPage() {
   const posts = await getBlogPosts();
 
   return (
-    <div className="flex flex-col gap-y-6 w-full">
+    <div className="flex flex-col gap-y-6">
       <div className="space-y-1.5">
         <h1 className="text-lg font-semibold tracking-tight drop-shadow-glow">
           Blog
@@ -55,7 +55,7 @@ function BlogPostLink({
     <Link
       href={href}
       className={cn(
-        "bg-none flex flex-col items-start w-full py-4 px-4 -ml-[15px] text-sm space-y-1 group",
+        "bg-none flex flex-col items-start py-4 px-4 -ml-4 text-sm space-y-1 group",
         "border-text-50/10 border-t-0 border-x-0 border-b rounded-b-none",
         "hover:bg-secondary/30",
         "first:rounded-t-md",

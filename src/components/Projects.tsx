@@ -6,7 +6,7 @@ import { cn } from "../utils/utils";
 
 export const Projects: React.FC = () => {
   return (
-    <div className="flex flex-col h-full gap-y-6 grow w-full max-w-prose">
+    <div className="flex flex-col gap-y-6">
       <div className="space-y-1.5">
         <h1 className="text-lg font-semibold tracking-tight drop-shadow-glow">
           Projects
@@ -73,7 +73,7 @@ export default function ProjectCard({
     <Link
       href={href}
       className={cn(
-        "bg-none flex flex-col items-start gap-0.5 w-full py-4 px-4 -ml-[15px] text-sm space-y-1 group",
+        "bg-none flex flex-col items-start gap-0.5 py-3 px-4 -mx-4 text-sm space-y-1 group",
         "border-text-50/10 border-t-0 border-x-0 border-b rounded-b-none",
         "hover:bg-secondary/30",
         "first:rounded-t-md",

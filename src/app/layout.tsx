@@ -33,7 +33,7 @@ export default function RootLayout({
         className={`${inter.variable} ${geistMono.variable} antialiased bg-background bg-gradient-to-br from-background/15 via-secondary/15 to-background/15 animate-background bg-cover bg-fixed transform-gpu flex flex-col min-h-dvh`}
       >
         <Navbar />
-        <PageContainer className="flex flex-col grow">{children}</PageContainer>
+        <PageContainer>{children}</PageContainer>
       </body>
     </html>
   );
