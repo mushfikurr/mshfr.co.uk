@@ -20,11 +20,11 @@ export default function BackgroundImage() {
         priority={false}
         loading="lazy"
         className={cn(
-          "object-cover object-center transition-opacity duration-1000",
-          "[mask-image:linear-gradient(to_top,black_0%,transparent_70%)] [mask-size:100%] [mask-repeat:no-repeat] [mask-mode:alpha]",
-          imageLoaded ? "opacity-60" : "opacity-0"
+          "object-cover object-center transition-[opacity,filter] duration-1000",
+          "[mask-image:linear-gradient(to_top,black_0%,transparent_60%)] [mask-size:100%] [mask-repeat:no-repeat] [mask-mode:alpha]",
+          imageLoaded ? "opacity-50" : "opacity-0 blur-none"
         )}
-        onLoadingComplete={handleImageLoad}
+        onLoad={handleImageLoad}
       />
     </div>
   );
