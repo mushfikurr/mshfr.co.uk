@@ -3,6 +3,7 @@ import { Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { PageContainer } from "@/components/ui/PageContainer";
+import Script from "next/script";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -34,10 +35,7 @@ export default function RootLayout({
       >
         <Navbar />
         <PageContainer>{children}</PageContainer>
-        <script
-          async
-          src="https://scripts.simpleanalyticscdn.com/latest.js"
-        ></script>
+        <Script src="https://scripts.simpleanalyticscdn.com/latest.js"></Script>
       </body>
     </html>
   );
