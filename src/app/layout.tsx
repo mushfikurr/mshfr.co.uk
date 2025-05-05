@@ -34,6 +34,10 @@ export default function RootLayout({
       >
         <Navbar />
         <PageContainer>{children}</PageContainer>
+        <script
+          async
+          src="https://scripts.simpleanalyticscdn.com/latest.js"
+        ></script>
       </body>
     </html>
   );
