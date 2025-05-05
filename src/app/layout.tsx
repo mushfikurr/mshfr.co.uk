@@ -4,6 +4,8 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { PageContainer } from "@/components/ui/PageContainer";
 import Script from "next/script";
+import Image from "next/image";
+import BackgroundImage from "@/components/BackgroundImage";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -33,10 +35,11 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${geistMono.variable} antialiased bg-background bg-gradient-to-br from-background/15 via-secondary/15 to-background/15 animate-background bg-cover bg-fixed transform-gpu flex flex-col min-h-dvh`}
       >
+        <BackgroundImage />
         <Navbar />
         <PageContainer>{children}</PageContainer>
-        <Script src="https://scripts.simpleanalyticscdn.com/latest.js"></Script>
       </body>
+      <Script src="https://scripts.simpleanalyticscdn.com/latest.js"></Script>
     </html>
   );
 }
