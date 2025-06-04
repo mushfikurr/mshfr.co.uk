@@ -26,6 +26,7 @@ export const HeaderImage = ({ src, alt, ...rest }: HeaderImageProps) => {
           width={1200}
           height={600}
           priority
+          placeholder="blur"
           className="rounded-md drop-shadow-lg"
           {...rest}
         />
