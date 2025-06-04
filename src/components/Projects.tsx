@@ -1,10 +1,10 @@
 "use client";
 
-import { Archive, ArrowRight } from "lucide-react";
+import { Archive, ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
 import { cn } from "../utils/utils";
 
-export const Projects: React.FC = () => {
+export const Projects: React.FC<{ overlineStars: number }> = ({ overlineStars }) => {
   return (
     <div className="flex flex-col gap-y-6">
       <div className="space-y-1.5">
@@ -30,6 +30,7 @@ export const Projects: React.FC = () => {
           title="Overline"
           description="Brings a Linux style topbar to Windows, built with Zebar and React."
           href="https://github.com/mushfikurr/overline-zebar"
+          stars={overlineStars}
         />
       </div>
       <div className="space-y-1.5">
@@ -63,17 +64,20 @@ interface ProjectCardProps extends React.ComponentPropsWithoutRef<"div"> {
   title: string;
   description: string;
   href: string;
+  stars?: number;
 }
+
 export default function ProjectCard({
   title,
   description,
   href,
+  stars,
 }: ProjectCardProps) {
   return (
     <Link
       href={href}
       className={cn(
-        "bg-none flex flex-col items-start gap-0.5 py-3 px-4 -mx-4 text-sm space-y-1 group",
+        "bg-none flex flex-row justify-between py-3 px-4 -mx-4 text-sm group",
         "border-text-50/10 border-t-0 border-x-0 border-b rounded-b-none",
         "hover:bg-secondary/30",
         "first:rounded-t-md",
@@ -81,14 +85,22 @@ export default function ProjectCard({
         "transition-colors ease-in-out duration-300"
       )}
     >
-      <h1 className="font-medium leading-[1.1] inline-flex items-center justify-between gap-2">
-        {title}{" "}
-        <ArrowRight
-          className="h-3 w-3 text-text-300 group-hover:text-text-200 transition-all -translate-x-1 group-hover:translate-x-1 duration-300 ease-in-out opacity-0 group-hover:opacity-100"
-          strokeWidth={3}
-        />
-      </h1>
-      <p className="text-text-300">{description} </p>
+      <div className="flex flex-col gap-1">
+        <h1 className="font-medium leading-[1.1] inline-flex items-center gap-2">
+          {title}
+          <ArrowRight
+            className="h-3 w-3 text-text-300 group-hover:text-text-200 transition-all -translate-x-1 group-hover:translate-x-1 duration-300 ease-in-out opacity-0 group-hover:opacity-100"
+            strokeWidth={3}
+          />
+        </h1>
+        <p className="text-text-300">{description}</p>
+      </div>
+      {typeof stars === "number" && (
+        <div className="flex items-center gap-1.5 text-text-300 self-center group-hover:drop-shadow-glow transition-all duration-500 ease-in-out">
+          <Star className="h-3 w-3 text-text-300 group-hover:text-text-200 mb-[0.5px] transition-colors ease-in-out duration-500" strokeWidth={3} />
+          <span className="text-xs font-semibold text-text-200">{stars}</span>
+        </div>
+      )}
     </Link>
   );
 }
