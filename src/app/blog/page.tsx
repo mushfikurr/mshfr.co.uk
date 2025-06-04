@@ -1,6 +1,6 @@
 import Chip from "@/components/ui/Chip";
 import { CustomLink } from "@/components/ui/Link";
-import { getBlogPosts } from "@/lib/blog/getPosts";
+import { getBlogPosts } from "@/lib/blog";
 import { cn } from "@/utils/utils";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";

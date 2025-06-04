@@ -1,6 +1,6 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Metadata } from "next";
-import { loadMdxWithMeta } from "@/lib/blog/loadMdxWithMeta";
+import { loadMdxWithMeta, getBlogPosts } from "@/lib/blog";
 import { HeaderImage } from "@/components/ui/HeaderImage";
 import { CustomLink } from "@/components/ui/Link";
 import { Divider } from "@/components/ui/Divider";
@@ -21,6 +21,11 @@ const components = {
   ),
 };
 
+export async function generateStaticParams() {
+  const posts = await getBlogPosts();
+  return posts.map((post: any) => ({ slug: post.slug }));
+}
+
 export default async function BlogSlugPage({
   params,
 }: {
@@ -28,7 +33,6 @@ export default async function BlogSlugPage({
 }) {
   const { slug } = await params;
   const { content } = await loadMdxWithMeta(slug);
-
   return <MDXRemote source={content} components={components} />;
 }
 
@@ -63,3 +67,5 @@ export async function generateMetadata({
     },
   };
 }
+
+export const dynamicParams = false;
