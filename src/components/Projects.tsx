@@ -17,16 +17,6 @@ export const Projects: React.FC<{ overlineStars: number }> = ({ overlineStars })
       </div>
       <div className="relative">
         <ProjectCard
-          title="Velvara"
-          description="A self-hosted, headless e-commerce platform for premium perfume oils, built with Medusa.js, Next.js, and Stripe."
-          href="https://velvara.co.uk"
-        />
-        <ProjectCard
-          title="Focality"
-          description="Multiplayer focus platform for everyone, built with Next.js and Convex."
-          href="https://focality.netlify.app"
-        />
-        <ProjectCard
           title="Overline"
           description="Brings a Linux style topbar to Windows, built with Zebar and React."
           href="https://github.com/mushfikurr/overline-zebar"

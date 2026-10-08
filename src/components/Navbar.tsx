@@ -8,7 +8,6 @@ import { cn } from "../utils/utils";
 const pages = [
   { name: "Me", href: "/" },
   { name: "Projects", href: "/projects" },
-  { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
 

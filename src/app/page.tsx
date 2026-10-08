@@ -19,9 +19,6 @@ export default async function Home() {
           <CustomLink href="/projects" className="text-sm">
             My projects
           </CustomLink>
-          <CustomLink href="/blog" className="text-sm">
-            Blog
-          </CustomLink>
           <CustomLink href="/contact" className="text-sm">
             Contact
           </CustomLink>
