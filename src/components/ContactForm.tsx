@@ -16,7 +16,15 @@ const initialState: StatusType = {
 declare global {
   interface Window {
     turnstile?: {
-      render: (el: string | HTMLElement, options: any) => string;
+      render: (
+        el: string | HTMLElement,
+        options: {
+          sitekey?: string;
+          callback?: (token: string) => void;
+          "error-callback"?: () => void;
+          "expired-callback"?: () => void;
+        }
+      ) => string;
       reset: (widgetId: string) => void;
     };
   }

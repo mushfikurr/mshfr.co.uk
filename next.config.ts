@@ -10,9 +10,6 @@ const nextConfig: NextConfig = {
     }
   },
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
 };
 
 export default withMDX(nextConfig);

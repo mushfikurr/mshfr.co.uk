@@ -23,7 +23,7 @@ const components = {
 
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
-  return posts.map((post: any) => ({ slug: post.slug }));
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
 export default async function BlogSlugPage({

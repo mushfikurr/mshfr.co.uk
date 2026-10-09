@@ -1,4 +1,7 @@
 import type { Config } from "tailwindcss";
+import autoFitGrid from "@shrutibalasa/tailwind-grid-auto-fit";
+import tailwindcssAnimate from "tailwindcss-animate";
+import tailwindTypography from "@tailwindcss/typography";
 
 export default {
   content: [
@@ -70,9 +73,5 @@ export default {
       },
     },
   },
-  plugins: [
-    require("@shrutibalasa/tailwind-grid-auto-fit"),
-    require("tailwindcss-animate"),
-    require("@tailwindcss/typography"),
-  ],
+  plugins: [autoFitGrid, tailwindcssAnimate, tailwindTypography],
 } satisfies Config;

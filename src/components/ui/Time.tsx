@@ -15,6 +15,21 @@ import {
 import { FC } from "react";
 import useLondonTime from "../../utils/hooks/useLondonTime";
 
+const clocks = [
+  Clock12,
+  Clock1,
+  Clock2,
+  Clock3,
+  Clock4,
+  Clock5,
+  Clock6,
+  Clock7,
+  Clock8,
+  Clock9,
+  Clock10,
+  Clock11,
+];
+
 const Time: FC = () => {
   const londonTime = useLondonTime();
   const currentHour = new Date().toLocaleString("en-GB", {
@@ -23,37 +38,7 @@ const Time: FC = () => {
     timeZone: "Europe/London",
   });
 
-  const getClockComponent = (hour: number) => {
-    switch (hour % 12) {
-      case 1:
-        return Clock1;
-      case 2:
-        return Clock2;
-      case 3:
-        return Clock3;
-      case 4:
-        return Clock4;
-      case 5:
-        return Clock5;
-      case 6:
-        return Clock6;
-      case 7:
-        return Clock7;
-      case 8:
-        return Clock8;
-      case 9:
-        return Clock9;
-      case 10:
-        return Clock10;
-      case 11:
-        return Clock11;
-      case 0:
-      default:
-        return Clock12;
-    }
-  };
-
-  const ClockComponent = getClockComponent(parseInt(currentHour, 10));
+  const ClockComponent = clocks[parseInt(currentHour, 10) % 12];
 
   return (
     <div className="absolute px-14 flex items-center gap-3 max-sm:hidden">

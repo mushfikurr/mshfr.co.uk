@@ -4,7 +4,6 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { PageContainer } from "@/components/ui/PageContainer";
 import Script from "next/script";
-import Image from "next/image";
 import BackgroundImage from "@/components/BackgroundImage";
 
 const inter = Inter({
